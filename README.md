@@ -16,7 +16,7 @@
 
 ## 🌐 Demo
 
-Akses panel admin: **[https://admin-cabdindikwil2.vercel.app/](https://admin-cabdindikwil2.vercel.app/)** _(hosted on Vercel)_
+Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-cabdindikwil-2.vercel.app/)** _(hosted on Vercel)_
 
 ---
 

@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏫 ADMIN-CABDINDIKWIL2
 
-## Getting Started
+**Sistem Admin Website Cabang Dinas Pendidikan Wilayah II Kabupaten Rejang Lebong**
 
-First, run the development server:
+> Panel administrasi untuk mengelola konten dan data website resmi **Dinas Pendidikan Kabupaten Rejang Lebong** sejak 2025.
+
+![Platform](https://img.shields.io/badge/platform-Web-blue?style=flat-square)
+![Next.js](https://img.shields.io/badge/built%20with-Next.js-000000?logo=nextdotjs&style=flat-square)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white&style=flat-square)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?logo=tailwindcss&logoColor=white&style=flat-square)
+![Admin Dashboard](https://img.shields.io/badge/Dashboard-Admin-10b981?style=flat-square)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000?logo=vercel&logoColor=white&style=flat-square)
+
+---
+
+## 🌐 Demo
+
+Akses panel admin: **[https://admin-cabdindikwil2.vercel.app/](https://admin-cabdindikwil2.vercel.app/)** _(hosted on Vercel)_
+
+---
+
+## 🚀 Fitur Admin
+
+| Modul | Deskripsi |
+| ----- | --------- |
+
+---
+
+## ⚙️ Teknologi
+
+| Layer                | Stack                                           |
+| -------------------- | ----------------------------------------------- |
+| **Frontend**         | Next.js 15 (App Router), React 19, TypeScript 5 |
+| **Styling**          | Tailwind CSS 4, DaisyUI Components              |
+| **State Management** | Zustand                                         |
+| **Form Handling**    | React Hook Form + Zod Validation                |
+| **Tables**           | TanStack Table v8                               |
+| **Authentication**   | NextAuth.js                                     |
+| **Database**         | PostgreSQL dengan Prisma ORM                    |
+| **UI Components**    | Shadcn/ui, Lucide React Icons                   |
+| **Development**      | ESLint, Prettier, TypeScript                    |
+
+---
+
+## 🛠️ Instalasi
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Klon repository
+$ git clone https://github.com/BhinnekaDev/ADMIN-CABDINDIKWIL2
+$ cd ADMIN-CABDINDIKWIL2
+
+# Instal dependensi
+$ npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Setup environment variables:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Salin file environment
+$ cp .env.example .env.local
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Edit .env.local dengan konfigurasi database dan auth
+```
 
-## Learn More
+Jalankan development server:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+$ npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Akses melalui [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Struktur Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+admin-cabdindikwil2/
+├── app/
+├── package.json
+└── README.md
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🧰 Script npm
+
+| Perintah          | Fungsi                         |
+| ----------------- | ------------------------------ |
+| `npm run dev`     | Menjalankan development server |
+| `npm run build`   | Build production               |
+| `npm run start`   | Menjalankan production build   |
+| `npm run lint`    | Menjalankan ESLint             |
+| `npm run db:push` | Sync schema database           |
+| `npm run db:seed` | Seed data sample               |
+| `npm run studio`  | Buka Prisma Studio             |
+
+---
+
+## 🔐 Default Login
+
+```bash
+Username: admin
+Password: admin123
+```
+
+_Disarankan untuk mengganti credentials default setelah instalasi pertama_
+
+---
+
+## 🤝 Kontribusi
+
+1. Fork repository
+2. Buat feature branch (`git checkout -b feature/namafitur`)
+3. Commit changes (`git commit -m 'feat: tambah fitur x'`)
+4. Push to branch (`git push origin feature/namafitur`)
+5. Buat Pull Request
+
+---
+
+## 📜 Lisensi
+
+MIT © 2025 [Bhinneka Dev](https://github.com/BhinnekaDev)
+
+---
+
+<p align="center">
+  <img alt="Admin Dashboard Preview" src="https://via.placeholder.com/800x400/1e40af/ffffff?text=Admin+Dashboard+Cabdin+Dikwil+2" width="80%" />
+</p>
+
+<p align="center"><sub>Panel Admin Cabang Dinas Pendidikan Wilayah II – Rejang Lebong</sub></p>

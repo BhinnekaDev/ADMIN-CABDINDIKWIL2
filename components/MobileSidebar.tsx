@@ -1,4 +1,6 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useState } from "react";
 import { Power } from "lucide-react";
 import { useAuth } from "@/app/hooks/useAuth";
 import { menuItems } from "@/constants/menuItems";
@@ -12,6 +14,18 @@ export const MobileSidebar: FC<{
 }> = ({ isOpen, onClose, active, onSelect }) => {
   const { logout } = useAuth();
 
+  const [openDropdown, setOpenDropdown] = useState<string | null>(
+    menuItems.find(
+      (item) =>
+        item.name === active ||
+        item.subItems?.some((sub) => sub.name === active)
+    )?.name || null
+  );
+
+  const handleToggleDropdown = (name: string) => {
+    setOpenDropdown((prev) => (prev === name ? null : name));
+  };
+
   return (
     isOpen && (
       <div className="fixed inset-0 z-50 dark:bg-black/50 bg-white/50 flex justify-center items-end lg:hidden">
@@ -22,13 +36,16 @@ export const MobileSidebar: FC<{
               ✕
             </button>
           </div>
-          <ul className="menu gap-3 w-full">
+          <ul className="menu gap-3 w-full relative">
             {menuItems.map((item) => (
               <SidebarItem
                 key={item.name}
                 item={item}
                 collapsed={false}
                 isActive={active === item.name}
+                activeName={active}
+                openDropdown={openDropdown}
+                onToggleDropdown={handleToggleDropdown}
                 onClick={() => {
                   onSelect(item.name);
                   onClose();

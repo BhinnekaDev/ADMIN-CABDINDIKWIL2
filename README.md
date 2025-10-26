@@ -98,7 +98,7 @@ admin-cabdindikwil2/
 │   ├── Sidebar.tsx
 │   └── SidebarItem.tsx
 ├── hooks
-│   ├── UseActiveMenu.tsx
+│   ├── UseActiveMenu.ts
 │   └── UseAuthGuard.ts
 ├── interfaces
 │   ├── HeaderProps.interface.tsx

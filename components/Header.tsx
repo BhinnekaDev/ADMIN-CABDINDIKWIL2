@@ -25,7 +25,7 @@ export const Header: FC<HeaderProps> = ({ active, onOpenMobileSidebar }) => {
   }, []);
 
   return (
-    <header className="navbar sticky top-0 z-50 bg-base-100 shadow-md px-6 lg:px-8">
+    <header className="navbar sticky top-0 z-50 bg-base-100 px-6 lg:px-8">
       <div className="navbar-start flex items-center gap-4">
         <button
           className="btn btn-ghost btn-circle lg:hidden"
@@ -58,7 +58,7 @@ export const Header: FC<HeaderProps> = ({ active, onOpenMobileSidebar }) => {
               <li>
                 <a
                   onClick={logout}
-                  className="flex items-center gap-2 hover:bg-red-500 text-white rounded-lg p-2 transition"
+                  className="flex items-center gap-2 hover:bg-red-500 dark:text-white hover:text-white rounded-lg p-2 transition"
                 >
                   <Power className="h-4 w-4" />
                   Keluar

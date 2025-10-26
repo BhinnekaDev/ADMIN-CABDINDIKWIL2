@@ -90,17 +90,41 @@ admin-cabdindikwil2/
 │   │   ├── interfaces/
 │   │   │   └── auth.interface.ts
 │   │   └── useAuth.ts
+│   ├── jenis-pendidikan/
+│   │   ├── components/
+│   │   │   ├── HeaderJenisSekolah.tsx
+│   │   │   ├── ModalJenisSekolah.tsx
+│   │   │   └── TableJenisSekolah.tsx
+│   │   ├── interfaces/
+│   │   │   └── data-item.interface.ts
+│   │   ├── hooks/
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-jenis-sekolah.interface.ts
+│   │   │   ├── jenis-sekolah.interface.ts
+│   │   │   ├── modal-jenis-sekolah.interface.ts
+│   │   │   └── table-sekolah.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── lokasi/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── satian-pendidikan/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── layout.tsx
 │   └── page.tsx
-├── components
+├── components/
 │   ├── Header.tsx
 │   ├── MobileSidebar.tsx
 │   ├── Sidebar.tsx
-│   └── SidebarItem.tsx
-├── hooks
-│   ├── UseActiveMenu.ts
-│   └── UseAuthGuard.ts
-├── interfaces
+│   ├── SidebarItem.tsx
+│   └── menuItems.tsx
+├── hooks/
+│   ├── useActiveMenu.ts
+│   └── useAuthGuard.ts
+├── constants/
+│   └── menuItems.ts
+├── interfaces/
 │   ├── HeaderProps.interface.tsx
 │   ├── SidebarItemProps.interface.tsx
 │   └── Sidebar.interface.tsx

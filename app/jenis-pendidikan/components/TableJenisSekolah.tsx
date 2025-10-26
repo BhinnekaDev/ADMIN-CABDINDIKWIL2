@@ -10,7 +10,6 @@ export default function TableJenisSekolah({
 }: TableJenisSekolahProps) {
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
-  // Pagination state
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -128,7 +127,6 @@ export default function TableJenisSekolah({
         </table>
       </div>
 
-      {/* Pagination controls */}
       {totalPages > 1 && (
         <div className="flex gap-2 mt-4">
           <button
@@ -136,7 +134,7 @@ export default function TableJenisSekolah({
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 1}
           >
-            Previous
+            Sebelum
           </button>
           {Array.from({ length: totalPages }, (_, i) => (
             <button
@@ -154,7 +152,7 @@ export default function TableJenisSekolah({
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-            Next
+            Selanjutnya
           </button>
         </div>
       )}

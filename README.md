@@ -96,13 +96,15 @@ admin-cabdindikwil2/
 │   │   │   ├── ModalJenisSekolah.tsx
 │   │   │   └── TableJenisSekolah.tsx
 │   │   ├── interfaces/
-│   │   │   └── data-item.interface.ts
-│   │   ├── hooks/
+│   │   │   ├── create-jenis-sekolah-props.interface.ts
 │   │   │   ├── data-item.interface.ts
 │   │   │   ├── header-jenis-sekolah.interface.ts
 │   │   │   ├── jenis-sekolah.interface.ts
 │   │   │   ├── modal-jenis-sekolah.interface.ts
 │   │   │   └── table-sekolah.interface.ts
+│   │   ├── hooks/
+│   │   │   ├── useCreateJenisSekolah.ts
+│   │   │   └── useJenisSekolah.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── lokasi/

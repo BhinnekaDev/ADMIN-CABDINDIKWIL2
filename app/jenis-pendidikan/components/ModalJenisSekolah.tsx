@@ -5,6 +5,7 @@ export default function ModalJenisSekolah({
   modalInput,
   closeModal,
   editingItem,
+  loadingCreate,
   setModalInput,
 }: ModalJenisSekolahProps) {
   return (
@@ -24,8 +25,16 @@ export default function ModalJenisSekolah({
           <button className="btn btn-secondary" onClick={closeModal}>
             Batal
           </button>
-          <button className="btn btn-primary" onClick={onSubmit}>
-            {editingItem ? "Perbarui" : "Simpan"}
+          <button
+            disabled={loadingCreate}
+            className="btn btn-primary"
+            onClick={onSubmit}
+          >
+            {loadingCreate
+              ? "Menyimpan..."
+              : editingItem
+              ? "Perbarui"
+              : "Simpan"}
           </button>
         </div>
       </div>

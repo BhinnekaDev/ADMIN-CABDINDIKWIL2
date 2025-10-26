@@ -1,7 +1,8 @@
 import { FC } from "react";
+import { Power } from "lucide-react";
 import { useAuth } from "@/app/hooks/useAuth";
+import { menuItems } from "@/constants/menuItems";
 import { SidebarItem } from "@/components/SidebarItem";
-import { Home, Power, User, Settings } from "lucide-react";
 
 export const MobileSidebar: FC<{
   isOpen: boolean;
@@ -10,12 +11,6 @@ export const MobileSidebar: FC<{
   onSelect: (name: string) => void;
 }> = ({ isOpen, onClose, active, onSelect }) => {
   const { logout } = useAuth();
-
-  const menuItems = [
-    { name: "Beranda", icon: <Home className="h-5 w-5" /> },
-    { name: "Settings", icon: <Settings className="h-5 w-5" /> },
-    { name: "Profile", icon: <User className="h-5 w-5" /> },
-  ];
 
   return (
     isOpen && (

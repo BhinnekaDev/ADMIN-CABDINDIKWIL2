@@ -83,6 +83,11 @@ Akses melalui [http://localhost:3000](http://localhost:3000).
 ```
 admin-cabdindikwil2/
 ├── app/
+│   ├── dashboard/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── hooks/
 │   │   ├── interfaces/
 │   │   │   └── auth.interface.ts

@@ -1,12 +1,12 @@
 "use client";
 
-import toast from "react-hot-toast";
-import { useState, useCallback } from "react";
 import {
-  LoginPayload,
   User,
+  LoginPayload,
   LoginResponse,
 } from "@/app/hooks/interfaces/auth.interface";
+import toast from "react-hot-toast";
+import { useState, useCallback } from "react";
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);

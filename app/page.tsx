@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/hooks/useAuth";
 
 export default function LoginPage() {
+  const router = useRouter();
   const { login, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,12 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login({ email, password });
+    try {
+      await login({ email, password });
+      router.push("/dashboard");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

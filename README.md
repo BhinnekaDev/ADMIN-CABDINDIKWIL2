@@ -131,7 +131,7 @@ MIT © 2025 [Bhinneka Dev](https://github.com/BhinnekaDev)
 ---
 
 <p align="center">
-  <img alt="Admin Dashboard Preview" src="https://via.placeholder.com/800x400/1e40af/ffffff?text=Admin+Dashboard+Cabdin+Dikwil+2" width="80%" />
+  <img alt="Admin Dashboard Preview" src="https://github.com/user-attachments/assets/545535b8-a50c-44ae-8de3-5b3bba911a46" width="80%" />
 </p>
 
 <p align="center"><sub>Panel Admin Cabang Dinas Pendidikan Wilayah II – Rejang Lebong</sub></p>

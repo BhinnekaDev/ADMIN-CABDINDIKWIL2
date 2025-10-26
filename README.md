@@ -20,10 +20,13 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 
 ---
 
-## 🚀 Fitur Admin
+## ✨ Fitur Admin
 
-| Modul | Deskripsi |
-| ----- | --------- |
+| Fitur                    | Deskripsi                                                                                    |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| **Auto Theme Detection** | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`) |
+| **DaisyUI Components**   | Memanfaatkan komponen siap pakai yang konsisten dan elegan                                   |
+| **Responsive Design**    | Tampilan optimal di semua ukuran layar (mobile hingga desktop)                               |
 
 ---
 
@@ -78,6 +81,8 @@ Akses melalui [http://localhost:3000](http://localhost:3000).
 ```
 admin-cabdindikwil2/
 ├── app/
+│   ├── layout.tsx
+│   └──page.tsx
 ├── package.json
 └── README.md
 ```

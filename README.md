@@ -22,11 +22,13 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 
 ## ✨ Fitur Admin
 
-| Fitur                    | Deskripsi                                                                                    |
-| ------------------------ | -------------------------------------------------------------------------------------------- |
-| **Auto Theme Detection** | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`) |
-| **DaisyUI Components**   | Memanfaatkan komponen siap pakai yang konsisten dan elegan                                   |
-| **Responsive Design**    | Tampilan optimal di semua ukuran layar (mobile hingga desktop)                               |
+| Fitur                    | Deskripsi                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Auto Theme Detection** | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`)                                                        |
+| **DaisyUI Components**   | Memanfaatkan komponen siap pakai yang konsisten dan elegan                                                                                          |
+| **Responsive Design**    | Tampilan optimal di semua ukuran layar (mobile hingga desktop)                                                                                      |
+| **Authentication**       | Login, logout, dan manajemen sesi pengguna menggunakan token dan Supabase/Auth API, termasuk validasi email dan penyimpanan session di localStorage |
+|                          |
 
 ---
 
@@ -81,8 +83,12 @@ Akses melalui [http://localhost:3000](http://localhost:3000).
 ```
 admin-cabdindikwil2/
 ├── app/
+│   ├── hooks/
+│   │   ├── interfaces/
+│   │   │   └── auth.interface.ts
+│   │   └── useAuth.ts
 │   ├── layout.tsx
-│   └──page.tsx
+│   └── page.tsx
 ├── package.json
 └── README.md
 ```

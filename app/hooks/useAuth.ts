@@ -6,9 +6,11 @@ import {
   LoginResponse,
 } from "@/app/hooks/interfaces/auth.interface";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import { useState, useCallback } from "react";
 
 export function useAuth() {
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
@@ -60,13 +62,15 @@ export function useAuth() {
   const logout = useCallback(() => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    localStorage.removeItem("user");
+
     setUser(null);
     setAccessToken(null);
     setRefreshToken(null);
 
-    toast("Anda telah keluar.", { icon: "👋" });
-  }, []);
+    toast.success("Anda telah keluar.");
+
+    router.push("/");
+  }, [router, setUser, setAccessToken, setRefreshToken]);
 
   const restoreSession = useCallback(() => {
     const savedUser = localStorage.getItem("user");

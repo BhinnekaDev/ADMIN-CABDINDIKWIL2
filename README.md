@@ -84,8 +84,6 @@ Akses melalui [http://localhost:3000](http://localhost:3000).
 admin-cabdindikwil2/
 ├── app/
 │   ├── dashboard/
-│   │   ├── components/
-│   │   ├── hooks/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── hooks/
@@ -94,6 +92,18 @@ admin-cabdindikwil2/
 │   │   └── useAuth.ts
 │   ├── layout.tsx
 │   └── page.tsx
+├── components
+│   ├── Header.tsx
+│   ├── MobileSidebar.tsx
+│   ├── Sidebar.tsx
+│   └── SidebarItem.tsx
+├── hooks
+│   ├── UseActiveMenu.tsx
+│   └── UseAuthGuard.ts
+├── interfaces
+│   ├── HeaderProps.interface.tsx
+│   ├── SidebarItemProps.interface.tsx
+│   └── Sidebar.interface.tsx
 ├── package.json
 └── README.md
 ```

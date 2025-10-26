@@ -15,8 +15,11 @@ export interface SidebarItemType {
 }
 
 export interface SidebarItemProps {
+  item: SidebarItemType;
   isActive: boolean;
   collapsed: boolean;
-  onClick: () => void;
-  item: SidebarItemType;
+  onClick?: () => void;
+  openDropdown?: string | null;
+  onToggleDropdown?: (name: string) => void;
+  onSelect?: (name: string) => void;
 }

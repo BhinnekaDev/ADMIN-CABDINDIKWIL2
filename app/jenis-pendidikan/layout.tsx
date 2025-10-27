@@ -7,7 +7,9 @@ import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { useActiveMenu } from "@/hooks/useActiveMenu";
 import { MobileSidebar } from "@/components/MobileSidebar";
 
-const DashboardLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
+const JenisPendidikanLayout: FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const isAuthorized = useAuthGuard();
   const activeFromPath = useActiveMenu();
   const [collapsed, setCollapsed] = useState(false);
@@ -55,4 +57,4 @@ const DashboardLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
   );
 };
 
-export default DashboardLayout;
+export default JenisPendidikanLayout;

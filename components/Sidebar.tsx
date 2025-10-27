@@ -103,7 +103,7 @@ export const Sidebar: FC<SidebarProps> = ({
                       }}
                       className="flex items-center gap-2 p-2 rounded-lg hover:bg-base-300 w-full"
                     >
-                      {active === sub.name && !collapsed && (
+                      {active === sub.name && (
                         <span className="absolute -left-2 top-0 bottom-1 w-1 bg-accent rounded-r" />
                       )}
                       {sub.icon} {sub.name}

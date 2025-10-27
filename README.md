@@ -138,6 +138,33 @@ admin-cabdindikwil2/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── satuan-pendidikan/
+│   │   ├── components/
+│   │   │   ├── HeaderSatuanPendidikan.tsx
+│   │   │   ├── ModalHapusSatuanPendidikan.tsx
+│   │   │   ├── ModalSatuanPendidikan.tsx
+│   │   │   └── TableSatuanPendidikan.tsx
+│   │   ├── hooks/
+│   │   │   ├── useSatuanPendidikan.ts
+│   │   │   ├── useDeleteSatuanPendidikan.ts
+│   │   │   ├── UseEditSatuanPendidikanProps.ts
+│   │   │   └── useSatuanPendidikanSekolah.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-satuan-pendidikan-payload-props.interface.ts
+│   │   │   ├── create-lokasi-sekolah-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-lokasi-sekolah.interface.ts
+│   │   │   ├── jenis-sekolah-data.interface.ts
+│   │   │   ├── lokasi-data.interface.ts
+│   │   │   ├── modal-hapus-satuan-pendidikan-props.interface.ts
+│   │   │   ├── modal-satuan-pendidikan.interface.ts
+│   │   │   ├── satuan-pendidikan-data.interface.ts
+│   │   │   ├── satuan-pendidikan.interface.ts
+│   │   │   ├── table-satuan-pendidikan.interface.ts
+│   │   │   ├── use-delete-satuan-pendidikan-props.interface.ts
+│   │   │   ├── use-edit-satuan-pendidikan-props.interface.ts
+│   │   │   └── use-satuan-pendidikan-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── layout.tsx

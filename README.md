@@ -114,6 +114,27 @@ admin-cabdindikwil2/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── lokasi/
+│   │   ├── components/
+│   │   │   ├── HeaderLokasiSekolah.tsx
+│   │   │   ├── ModalHapusLokasiSekolah.tsx
+│   │   │   ├── ModalLokasiSekolah.tsx
+│   │   │   └── TableLokasiSekolah.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateLokasiSekolah.ts
+│   │   │   ├── useDeleteLokasiSekolah.ts
+│   │   │   ├── UseEditLokasiSekolahProps.ts
+│   │   │   └── useLokasiSekolah.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-lokasi-sekolah-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-lokasi-sekolah.interface.ts
+│   │   │   ├── lokasi-data.interface.ts
+│   │   │   ├── lokasi-sekolah.interface.ts
+│   │   │   ├── modal-hapus-lokasi-sekolah-props.interface.ts
+│   │   │   ├── modal-lokasi-sekolah.interface.ts
+│   │   │   ├── table-sekolah.interface.ts
+│   │   │   ├── use-delete-lokasi-sekolah-props.interface.ts
+│   │   │   └── use-edit-lokasi-sekolah-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── satuan-pendidikan/

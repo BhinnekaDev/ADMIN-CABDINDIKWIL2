@@ -93,24 +93,30 @@ admin-cabdindikwil2/
 │   ├── jenis-pendidikan/
 │   │   ├── components/
 │   │   │   ├── HeaderJenisSekolah.tsx
+│   │   │   ├── ModalHapusJenisSekolah.tsx
 │   │   │   ├── ModalJenisSekolah.tsx
 │   │   │   └── TableJenisSekolah.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateJenisSekolah.ts
+│   │   │   ├── useDeleteJenisSekolah.ts
+│   │   │   ├── UseEditJenisSekolahProps.ts
+│   │   │   └── useJenisSekolah.ts
 │   │   ├── interfaces/
 │   │   │   ├── create-jenis-sekolah-props.interface.ts
 │   │   │   ├── data-item.interface.ts
 │   │   │   ├── header-jenis-sekolah.interface.ts
 │   │   │   ├── jenis-sekolah.interface.ts
+│   │   │   ├── modal-hapus-jenis-sekolah-props.interface.ts
 │   │   │   ├── modal-jenis-sekolah.interface.ts
-│   │   │   └── table-sekolah.interface.ts
-│   │   ├── hooks/
-│   │   │   ├── useCreateJenisSekolah.ts
-│   │   │   └── useJenisSekolah.ts
+│   │   │   ├── table-sekolah.interface.ts
+│   │   │   ├── use-delete-jenis-sekolah-props.interface.ts
+│   │   │   └── use-edit-jenis-sekolah-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── lokasi/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
-│   ├── satian-pendidikan/
+│   ├── satuan-pendidikan/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── layout.tsx
@@ -128,8 +134,8 @@ admin-cabdindikwil2/
 │   └── menuItems.ts
 ├── interfaces/
 │   ├── HeaderProps.interface.tsx
-│   ├── SidebarItemProps.interface.tsx
-│   └── Sidebar.interface.tsx
+│   ├── Sidebar.interface.tsx
+│   └── SidebarItemProps.interface.tsx
 ├── package.json
 └── README.md
 ```
@@ -138,28 +144,12 @@ admin-cabdindikwil2/
 
 ## 🧰 Script npm
 
-| Perintah          | Fungsi                         |
-| ----------------- | ------------------------------ |
-| `npm run dev`     | Menjalankan development server |
-| `npm run build`   | Build production               |
-| `npm run start`   | Menjalankan production build   |
-| `npm run lint`    | Menjalankan ESLint             |
-| `npm run db:push` | Sync schema database           |
-| `npm run db:seed` | Seed data sample               |
-| `npm run studio`  | Buka Prisma Studio             |
-
----
-
-## 🔐 Default Login
-
-```bash
-Username: admin
-Password: admin123
-```
-
-_Disarankan untuk mengganti credentials default setelah instalasi pertama_
-
----
+| Perintah        | Fungsi                         |
+| --------------- | ------------------------------ |
+| `npm run dev`   | Menjalankan development server |
+| `npm run build` | Build production               |
+| `npm run start` | Menjalankan production build   |
+| `npm run lint`  | Menjalankan ESLint             |
 
 ## 🤝 Kontribusi
 

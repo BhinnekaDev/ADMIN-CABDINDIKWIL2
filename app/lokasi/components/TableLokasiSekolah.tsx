@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Edit2, Trash2 } from "lucide-react";
-import { TableJenisSekolahProps } from "@/app/jenis-pendidikan/interfaces/table-sekolah.interface";
+import { TableLokasiSekolahProps } from "@/app/lokasi/interfaces/table-sekolah.interface";
 
-export default function TableJenisSekolah({
+export default function TableLokasiSekolah({
   data,
   loading,
   openEditModal,
   openDeleteModal,
-}: TableJenisSekolahProps) {
+}: TableLokasiSekolahProps) {
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
   const itemsPerPage = 5;
@@ -29,7 +29,10 @@ export default function TableJenisSekolah({
           <thead>
             <tr>
               <th className="hidden sm:table-cell">Nomor</th>
-              <th>Jenis Sekolah</th>
+              <th>Kelurahan</th>
+              <th className="hidden sm:table-cell">Kecamatan</th>
+              <th className="hidden sm:table-cell">Kabupaten</th>
+              <th className="hidden sm:table-cell">Provinsi</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -38,28 +41,40 @@ export default function TableJenisSekolah({
               Array.from({ length: 4 }).map((_, i) => (
                 <tr key={i} className="animate-pulse">
                   <td className="hidden sm:table-cell">
-                    <div className="h-4 w-6 bg-gray-100 rounded"></div>
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td className="hidden sm:table-cell">
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td className="hidden sm:table-cell">
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td className="hidden sm:table-cell">
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
                   <td>
-                    <div className="h-4 w-32 bg-gray-100 rounded"></div>
+                    <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
                   </td>
                   <td>
-                    <div className="h-4 w-20 bg-gray-100 rounded"></div>
+                    <div className="h-4 w-20 bg-gray-100  dark:bg-gray-700 rounded"></div>
                   </td>
                 </tr>
               ))
             ) : paginatedData.length ? (
-              paginatedData.map((jenis, index) => (
-                <tr key={jenis.id}>
+              paginatedData.map((lokasi, index) => (
+                <tr key={lokasi.id}>
                   <td className="hidden sm:table-cell">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
-                  <td>{jenis.nama_jenis}</td>
+                  <td>{lokasi.kelurahan}</td>
+                  <td>{lokasi.kecamatan}</td>
+                  <td>{lokasi.kabupaten}</td>
+                  <td>{lokasi.provinsi}</td>
                   <td>
                     <div className="sm:hidden">
                       <button
                         className="btn btn-sm btn-ghost"
-                        onClick={() => setMobileActionItem(jenis.id)}
+                        onClick={() => setMobileActionItem(lokasi.id)}
                       >
                         ⋮
                       </button>
@@ -68,19 +83,19 @@ export default function TableJenisSekolah({
                     <div className="hidden sm:flex gap-2">
                       <button
                         className="btn btn-sm btn-outline btn-info flex items-center gap-1"
-                        onClick={() => openEditModal(jenis)}
+                        onClick={() => openEditModal(lokasi)}
                       >
                         <Edit2 size={14} /> Sunting
                       </button>
                       <button
                         className="btn btn-sm btn-outline btn-error flex items-center gap-1"
-                        onClick={() => openDeleteModal(jenis)}
+                        onClick={() => openDeleteModal(lokasi)}
                       >
                         <Trash2 size={14} /> Hapus
                       </button>
                     </div>
 
-                    {mobileActionItem === jenis.id && (
+                    {mobileActionItem === lokasi.id && (
                       <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
                         <div className="bg-white dark:bg-[#1d232a] w-full max-w-md p-4 rounded-t-lg animate-slide-up">
                           <h3 className="text-lg font-semibold mb-4">
@@ -89,7 +104,7 @@ export default function TableJenisSekolah({
                           <button
                             className="btn btn-block text-white btn-info mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openEditModal(jenis);
+                              openEditModal(lokasi);
                               setMobileActionItem(null);
                             }}
                           >
@@ -98,7 +113,7 @@ export default function TableJenisSekolah({
                           <button
                             className="btn btn-block text-white btn-error mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openDeleteModal(jenis);
+                              openDeleteModal(lokasi);
                               setMobileActionItem(null);
                             }}
                           >

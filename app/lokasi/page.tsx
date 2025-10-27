@@ -1,29 +1,130 @@
 "use client";
 
-import { Construction, Loader2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useLokasiSekolah } from "@/app/lokasi/hooks/useLokasiSekolah";
+import { DataItem } from "@/app/lokasi/interfaces/data-item.interface";
+import TableLokasiSekolah from "@/app/lokasi/components/TableLokasiSekolah";
+import ModalLokasiSekolah from "@/app/lokasi/components/ModalLokasiSekolah";
+import HeaderLokasiSekolah from "@/app/lokasi/components/HeaderLokasiSekolah";
+import { useCreateLokasiSekolah } from "@/app/lokasi/hooks/useCreateLokasiSekolah";
+import { useDeleteLokasiSekolah } from "@/app/lokasi/hooks/useDeleteLokasiSekolah";
+import { useEditLokasiSekolah } from "@/app/lokasi/hooks/UseEditLokasiSekolahProps";
+import ModalHapusLokasiSekolah from "@/app/lokasi/components/ModalHapusLokasiSekolah";
 
-export default function Page() {
+export default function LokasiSekolahPage() {
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState<DataItem[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [hapusItem, setHapusItem] = useState<DataItem | null>(null);
+  const [modalInput, setModalInput] = useState({
+    kelurahan: "",
+    kecamatan: "",
+    kabupaten: "",
+    provinsi: "",
+  });
+
+  const { data: fetchedData, loading } = useLokasiSekolah();
+  const { editLokasi, loading: editing } = useEditLokasiSekolah();
+  const { deleteLokasi, loading: deleting } = useDeleteLokasiSekolah();
+  const { createLokasi, loading: creating } = useCreateLokasiSekolah();
+  const [editingItem, setEditingItem] = useState<DataItem | null>(null);
+
+  useEffect(() => {
+    setData(fetchedData);
+  }, [fetchedData]);
+
+  const handleSubmit = async () => {
+    const { kelurahan, kecamatan, kabupaten, provinsi } = modalInput;
+    if (!kelurahan || !kecamatan || !kabupaten || !provinsi) return;
+
+    const newItem = await createLokasi(modalInput);
+    if (newItem) {
+      setData((prev) => [...prev, newItem]);
+      setModalOpen(false);
+    }
+  };
+
+  const filteredData = data
+    .filter((d) => d && d.kelurahan)
+    .filter((d) => d.kelurahan.toLowerCase().includes(search.toLowerCase()));
+
+  const openAddModal = () => {
+    setEditingItem(null);
+    setModalInput({
+      kelurahan: "",
+      kecamatan: "",
+      kabupaten: "",
+      provinsi: "",
+    });
+    setModalOpen(true);
+  };
+
+  const openEditModal = (item: DataItem) => {
+    setEditingItem(item);
+    setModalInput(item);
+    setModalOpen(true);
+  };
+
+  const openDeleteModal = (item: DataItem) => {
+    setHapusItem(item);
+  };
+
+  const handleEditSubmit = async () => {
+    if (!editingItem) return;
+
+    const updatedItem = await editLokasi(editingItem.id, modalInput);
+    if (updatedItem) {
+      setData((prev) =>
+        prev.map((d) => (d.id === updatedItem.id ? updatedItem : d))
+      );
+      setModalOpen(false);
+      setEditingItem(null);
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-base-100 text-center p-6 sm:p-12">
-      <div className="text-accent mb-6 animate-bounce">
-        <Construction className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto" />
-      </div>
+    <div className="flex flex-col items-center justify-center p-6 sm:p-12 w-full">
+      <HeaderLokasiSekolah
+        search={search}
+        setSearch={setSearch}
+        loading={loading}
+        openAddModal={openAddModal}
+      />
 
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-base-content">
-        Sedang Dalam Pengerjaan
-      </h1>
+      <TableLokasiSekolah
+        data={filteredData}
+        loading={loading}
+        openEditModal={openEditModal}
+        openDeleteModal={openDeleteModal}
+      />
 
-      <p className="text-base sm:text-lg md:text-xl text-base-content max-w-xs sm:max-w-md md:max-w-lg mb-6">
-        Halaman ini sedang dalam proses pengembangan. Mohon bersabar dan kembali
-        lagi nanti untuk versi lengkapnya.
-      </p>
+      {modalOpen && (
+        <ModalLokasiSekolah
+          modalInput={modalInput}
+          onSubmit={editingItem ? handleEditSubmit : handleSubmit}
+          loadingCreate={
+            editing ? (editingItem ? editing : creating) : creating
+          }
+          editingItem={editingItem}
+          setModalInput={setModalInput}
+          closeModal={() => setModalOpen(false)}
+        />
+      )}
 
-      <div className="flex items-center justify-center gap-2 text-accent">
-        <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 animate-spin" />
-        <span className="font-medium text-sm sm:text-base md:text-lg">
-          Loading...
-        </span>
-      </div>
+      {hapusItem && (
+        <ModalHapusLokasiSekolah
+          item={hapusItem}
+          loading={deleting}
+          closeModal={() => setHapusItem(null)}
+          onDelete={async (id: number) => {
+            const success = await deleteLokasi(id);
+            if (success) {
+              setData((prev) => prev.filter((d) => d.id !== id));
+              setHapusItem(null);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

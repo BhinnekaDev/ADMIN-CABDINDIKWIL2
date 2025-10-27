@@ -5,8 +5,8 @@ import { TableJenisSekolahProps } from "@/app/jenis-pendidikan/interfaces/table-
 export default function TableJenisSekolah({
   data,
   loading,
-  handleDelete,
   openEditModal,
+  openDeleteModal,
 }: TableJenisSekolahProps) {
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
@@ -74,7 +74,7 @@ export default function TableJenisSekolah({
                       </button>
                       <button
                         className="btn btn-sm btn-outline btn-error flex items-center gap-1"
-                        onClick={() => handleDelete(user.id)}
+                        onClick={() => openDeleteModal(user)}
                       >
                         <Trash2 size={14} /> Hapus
                       </button>
@@ -98,7 +98,7 @@ export default function TableJenisSekolah({
                           <button
                             className="btn btn-block text-white btn-error mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              handleDelete(user.id);
+                              openDeleteModal(user);
                               setMobileActionItem(null);
                             }}
                           >

@@ -35,6 +35,10 @@ export function useAuth() {
 
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem(
+        "fullName",
+        data.user.user_metadata?.full_name || ""
+      );
 
       setUser(data.user);
       setAccessToken(data.accessToken);

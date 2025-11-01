@@ -29,7 +29,7 @@ export default function ModalHapusBerita({
           className="input input-bordered w-full mb-4"
           value={confirmationText}
           onChange={(e) => setConfirmationText(e.target.value)}
-          placeholder="Ketik nama judul berita di sini"
+          placeholder="Ketik judul berita di sini"
         />
         <div className="flex gap-2 justify-end">
           <button

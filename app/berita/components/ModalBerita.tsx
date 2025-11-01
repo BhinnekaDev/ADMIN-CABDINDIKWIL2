@@ -63,12 +63,16 @@ peer-not-placeholder-shown:text-xs
           <input
             type="text"
             id="penulis"
-            value={modalInput.penulis}
+            value={
+              editingItem
+                ? editingItem.penulis
+                : localStorage.getItem("fullName") ?? ""
+            }
             onChange={(e) =>
               setModalInput({ ...modalInput, penulis: e.target.value })
             }
             placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0 cursor-not-allowed"
           />
           <label
             htmlFor="penulis"
@@ -116,7 +120,7 @@ peer-not-placeholder-shown:text-xs
                 <button
                   onClick={() => {
                     setPreviewImage(null);
-                    setModalInput({ ...modalInput, url_gambar: [] });
+                    setModalInput({ ...modalInput, berita_gambar: [] });
                   }}
                   className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
                 >
@@ -127,14 +131,18 @@ peer-not-placeholder-shown:text-xs
               <input
                 type="text"
                 value={modalInput.berita_gambar?.[0]?.keterangan || ""}
-                onChange={(e) =>
+                onChange={(e) => {
+                  const value = e.target.value;
                   setModalInput({
                     ...modalInput,
-                    url_gambar: [
-                      { url_gambar: previewImage!, keterangan: e.target.value },
+                    berita_gambar: [
+                      {
+                        ...modalInput.berita_gambar?.[0],
+                        keterangan: value,
+                      },
                     ],
-                  })
-                }
+                  });
+                }}
                 placeholder="Keterangan gambar"
                 className="input input-sm input-bordered w-48"
               />
@@ -156,7 +164,7 @@ peer-not-placeholder-shown:text-xs
                     setPreviewImage(base64);
                     setModalInput({
                       ...modalInput,
-                      url_gambar: [{ url_gambar: base64, keterangan: "" }],
+                      berita_gambar: [{ url_gambar: base64, keterangan: "" }],
                     });
                   };
                   reader.readAsDataURL(file);

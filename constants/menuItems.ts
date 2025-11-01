@@ -42,6 +42,11 @@ export const menuItems = [
         path: "/prakata",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
+      {
+        name: "Data Seputar Cabdin",
+        path: "/seputar-cabdin",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
     ],
   },
 ];

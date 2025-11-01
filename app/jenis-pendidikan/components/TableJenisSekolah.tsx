@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Edit2, Trash2 } from "lucide-react";
+import { Edit2, Trash2, AlertTriangle } from "lucide-react";
 import { TableJenisSekolahProps } from "@/app/jenis-pendidikan/interfaces/table-sekolah.interface";
 
 export default function TableJenisSekolah({
@@ -118,8 +118,15 @@ export default function TableJenisSekolah({
               ))
             ) : (
               <tr>
-                <td colSpan={3} className="text-center py-4">
-                  Data tidak ditemukan
+                <td colSpan={3} className="text-center py-8">
+                  <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
+                    <div className="w-16 h-16 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700">
+                      <AlertTriangle size={32} />
+                    </div>
+                    <span className="text-sm font-semibold">
+                      Tidak ada data
+                    </span>
+                  </div>
                 </td>
               </tr>
             )}

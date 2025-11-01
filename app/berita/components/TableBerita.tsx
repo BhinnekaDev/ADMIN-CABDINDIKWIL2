@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import { Edit2, Trash2, ImageOff } from "lucide-react";
+import { Edit2, Trash2, ImageOff, AlertTriangle } from "lucide-react";
 import { TableBeritaProps } from "@/app/berita/interfaces/table-berita.interface";
 
 export default function TableBerita({
@@ -56,9 +56,6 @@ export default function TableBerita({
                   </td>
                   <td className="hidden sm:table-cell">
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    <td>
-                      <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                    </td>
                   </td>
                   <td className="hidden md:table-cell">
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
@@ -175,8 +172,15 @@ export default function TableBerita({
               ))
             ) : (
               <tr>
-                <td colSpan={6} className="text-center py-4">
-                  Data tidak ditemukan
+                <td colSpan={6} className="text-center py-8">
+                  <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
+                    <div className="w-16 h-16 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700">
+                      <AlertTriangle size={32} />
+                    </div>
+                    <span className="text-sm font-semibold">
+                      Tidak ada data
+                    </span>
+                  </div>
                 </td>
               </tr>
             )}

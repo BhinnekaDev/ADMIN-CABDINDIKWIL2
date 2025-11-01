@@ -1,13 +1,14 @@
+import Image from "next/image";
 import { useState } from "react";
-import { Edit2, Trash2, AlertTriangle } from "lucide-react";
-import { TableLokasiSekolahProps } from "@/app/lokasi/interfaces/table-sekolah.interface";
+import { Edit2, Trash2, ImageOff, AlertTriangle } from "lucide-react";
+import { TableSeputarCabdinProps } from "@/app/seputar-cabdin/interfaces/table-seputar-cabdin.interface";
 
-export default function TableLokasiSekolah({
+export default function TableSeputarCabdin({
   data,
   loading,
   openEditModal,
   openDeleteModal,
-}: TableLokasiSekolahProps) {
+}: TableSeputarCabdinProps) {
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
   const itemsPerPage = 5;
@@ -22,6 +23,16 @@ export default function TableLokasiSekolah({
     setCurrentPage(page);
   };
 
+  const supabaseImageLoader = ({
+    src,
+    width,
+  }: {
+    src: string;
+    width: number;
+  }) => {
+    return `${src}?width=${width}`;
+  };
+
   return (
     <>
       <div className="overflow-x-auto w-full max-w-5xl shadow-lg rounded-lg">
@@ -29,10 +40,10 @@ export default function TableLokasiSekolah({
           <thead>
             <tr>
               <th className="hidden sm:table-cell">Nomor</th>
-              <th>Kelurahan</th>
-              <th className="hidden sm:table-cell">Kecamatan</th>
-              <th className="hidden sm:table-cell">Kabupaten</th>
-              <th className="hidden sm:table-cell">Provinsi</th>
+              <th className="hidden sm:table-cell">Gambar</th>
+              <th>Judul</th>
+              <th className="hidden md:table-cell">Penulis</th>
+              <th className="hidden xl:table-cell">Tanggal</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -46,13 +57,10 @@ export default function TableLokasiSekolah({
                   <td className="hidden sm:table-cell">
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
-                  <td className="hidden sm:table-cell">
+                  <td className="hidden md:table-cell">
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
-                  <td className="hidden sm:table-cell">
-                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
-                  </td>
-                  <td>
+                  <td className="hidden xl:table-cell">
                     <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
                   </td>
                   <td>
@@ -61,20 +69,53 @@ export default function TableLokasiSekolah({
                 </tr>
               ))
             ) : paginatedData.length ? (
-              paginatedData.map((lokasi, index) => (
-                <tr key={lokasi.id}>
+              paginatedData.map((seputarCabdin, index) => (
+                <tr key={seputarCabdin.id}>
                   <td className="hidden sm:table-cell">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
-                  <td>{lokasi.kelurahan}</td>
-                  <td className="hidden sm:table-cell">{lokasi.kecamatan}</td>
-                  <td className="hidden sm:table-cell">{lokasi.kabupaten}</td>
-                  <td className="hidden sm:table-cell">{lokasi.provinsi}</td>
+                  <td className="hidden sm:table-cell">
+                    {seputarCabdin.seputar_cabdin_gambar?.length ? (
+                      <div className="relative w-16 h-16">
+                        <Image
+                          loader={supabaseImageLoader}
+                          src={
+                            seputarCabdin.seputar_cabdin_gambar?.[0]
+                              ?.url_gambar || "/placeholder.png"
+                          }
+                          alt={
+                            seputarCabdin.seputar_cabdin_gambar?.[0]
+                              ?.keterangan || "Gambar"
+                          }
+                          fill
+                          className="object-cover rounded-lg border"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400">
+                        <ImageOff size={20} />
+                      </div>
+                    )}
+                  </td>
+                  <td>{seputarCabdin.judul}</td>
+                  <td className="hidden md:table-cell">
+                    {seputarCabdin.penulis}
+                  </td>
+                  <td className="hidden xl:table-cell">
+                    {" "}
+                    {new Date(
+                      seputarCabdin.tanggal_diterbitkan
+                    ).toLocaleDateString("id-ID", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </td>
                   <td>
                     <div className="sm:hidden">
                       <button
                         className="btn btn-sm btn-ghost"
-                        onClick={() => setMobileActionItem(lokasi.id)}
+                        onClick={() => setMobileActionItem(seputarCabdin.id)}
                       >
                         ⋮
                       </button>
@@ -83,19 +124,19 @@ export default function TableLokasiSekolah({
                     <div className="hidden sm:flex gap-2">
                       <button
                         className="btn btn-sm btn-outline btn-info flex items-center gap-1"
-                        onClick={() => openEditModal(lokasi)}
+                        onClick={() => openEditModal(seputarCabdin)}
                       >
                         <Edit2 size={14} /> Sunting
                       </button>
                       <button
                         className="btn btn-sm btn-outline btn-error flex items-center gap-1"
-                        onClick={() => openDeleteModal(lokasi)}
+                        onClick={() => openDeleteModal(seputarCabdin)}
                       >
                         <Trash2 size={14} /> Hapus
                       </button>
                     </div>
 
-                    {mobileActionItem === lokasi.id && (
+                    {mobileActionItem === seputarCabdin.id && (
                       <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
                         <div className="bg-white dark:bg-[#1d232a] w-full max-w-md p-4 rounded-t-lg animate-slide-up">
                           <h3 className="text-lg font-semibold mb-4">
@@ -104,7 +145,7 @@ export default function TableLokasiSekolah({
                           <button
                             className="btn btn-block text-white btn-info mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openEditModal(lokasi);
+                              openEditModal(seputarCabdin);
                               setMobileActionItem(null);
                             }}
                           >
@@ -113,7 +154,7 @@ export default function TableLokasiSekolah({
                           <button
                             className="btn btn-block text-white btn-error mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openDeleteModal(lokasi);
+                              openDeleteModal(seputarCabdin);
                               setMobileActionItem(null);
                             }}
                           >

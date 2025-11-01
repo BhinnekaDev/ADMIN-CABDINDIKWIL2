@@ -21,7 +21,7 @@ export default function Page() {
       <div className="flex items-center justify-center gap-2 text-accent">
         <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 animate-spin" />
         <span className="font-medium text-sm sm:text-base md:text-lg">
-          Loading...
+          Sedang Memuat...
         </span>
       </div>
     </div>

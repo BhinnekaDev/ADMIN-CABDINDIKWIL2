@@ -49,8 +49,8 @@ export default function BeritaPage() {
     setModalInput({
       isi: "",
       judul: "",
-      penulis: "",
-      url_gambar: [],
+      berita_gambar: [],
+      penulis: localStorage.getItem("fullName") || "",
       tanggal_diterbitkan: new Date().toISOString(),
     });
     setModalOpen(true);
@@ -58,7 +58,7 @@ export default function BeritaPage() {
 
   const openEditModal = (item: DataItem) => {
     setEditingItem(item);
-    const { id, isi, judul, penulis, tanggal_diterbitkan, berita_gambar } =
+    const { id, isi, judul, penulis, berita_gambar, tanggal_diterbitkan } =
       item;
 
     setModalInput({
@@ -66,8 +66,8 @@ export default function BeritaPage() {
       isi,
       judul,
       penulis,
-      tanggal_diterbitkan,
       berita_gambar,
+      tanggal_diterbitkan,
     });
     setModalOpen(true);
   };

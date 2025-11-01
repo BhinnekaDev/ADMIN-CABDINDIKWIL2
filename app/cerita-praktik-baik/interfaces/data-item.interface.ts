@@ -1,4 +1,4 @@
-export interface SeputarCabdinGambar {
+export interface CeritaPraktikBaikGambar {
   id?: number;
   keterangan?: string;
   url_gambar?: string;
@@ -13,7 +13,7 @@ export interface DataItem {
   dibuat_pada: string;
   diperbarui_pada: string;
   tanggal_diterbitkan: string;
-  seputar_cabdin_gambar: SeputarCabdinGambar[];
+  cerita_praktik_baik_gambar: CeritaPraktikBaikGambar[];
 }
 
 export type DataItemNonId = Partial<

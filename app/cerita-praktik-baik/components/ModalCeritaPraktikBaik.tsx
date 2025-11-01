@@ -6,18 +6,18 @@ import dynamic from "next/dynamic";
 import { ImagePlus, X } from "lucide-react";
 import "react-quill-new/dist/quill.snow.css";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-import { ModalSeputarCabdinProps } from "@/app/seputar-cabdin/interfaces/modal-seputar-cabdin.interface";
+import { ModalCeritaPraktikBaikProps } from "@/app/cerita-praktik-baik/interfaces/modal-cerita-praktik-baik.interface";
 
-export default function ModalSeputarCabdin({
+export default function ModalCeritaPraktikBaik({
   onSubmit,
   modalInput,
   closeModal,
   editingItem,
   loadingCreate,
   setModalInput,
-}: ModalSeputarCabdinProps) {
+}: ModalCeritaPraktikBaikProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(
-    modalInput.seputar_cabdin_gambar?.[0]?.url_gambar || null
+    modalInput.cerita_praktik_baik_gambar?.[0]?.url_gambar || null
   );
 
   const supabaseImageLoader = ({
@@ -34,7 +34,9 @@ export default function ModalSeputarCabdin({
     <div className="modal modal-open z-50">
       <div className="modal-box relative shadow-xl rounded-lg bg-white dark:bg-[#1d232a] max-w-3xl w-full">
         <h3 className="font-bold text-lg mb-4 text-center">
-          {editingItem ? "Edit Seputar Cabdin" : "Tambah Seputar Cabdin"}
+          {editingItem
+            ? "Edit Cerita Praktik Baik"
+            : "Tambah Cerita Praktik Baik"}
         </h3>
 
         <div className="relative mb-6">
@@ -86,7 +88,7 @@ peer-not-placeholder-shown:text-xs
         </div>
 
         <div className="mb-6">
-          <label className="font-medium mb-2 block">Isi Seputar Cabdin</label>
+          <label className="font-medium mb-2 block">Isi Cerita</label>
           <ReactQuill
             theme="snow"
             value={modalInput.isi}
@@ -120,7 +122,10 @@ peer-not-placeholder-shown:text-xs
                 <button
                   onClick={() => {
                     setPreviewImage(null);
-                    setModalInput({ ...modalInput, seputar_cabdin_gambar: [] });
+                    setModalInput({
+                      ...modalInput,
+                      cerita_praktik_baik_gambar: [],
+                    });
                   }}
                   className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
                 >
@@ -130,15 +135,21 @@ peer-not-placeholder-shown:text-xs
 
               <input
                 type="text"
-                value={modalInput.seputar_cabdin_gambar?.[0]?.keterangan || ""}
-                onChange={(e) =>
+                value={
+                  modalInput.cerita_praktik_baik_gambar?.[0]?.keterangan || ""
+                }
+                onChange={(e) => {
+                  const value = e.target.value;
                   setModalInput({
                     ...modalInput,
-                    seputar_cabdin_gambar: [
-                      { url_gambar: previewImage!, keterangan: e.target.value },
+                    cerita_praktik_baik_gambar: [
+                      {
+                        ...modalInput.cerita_praktik_baik_gambar?.[0],
+                        keterangan: value,
+                      },
                     ],
-                  })
-                }
+                  });
+                }}
                 placeholder="Keterangan gambar"
                 className="input input-sm input-bordered w-48"
               />
@@ -160,7 +171,7 @@ peer-not-placeholder-shown:text-xs
                     setPreviewImage(base64);
                     setModalInput({
                       ...modalInput,
-                      seputar_cabdin_gambar: [
+                      cerita_praktik_baik_gambar: [
                         { url_gambar: base64, keterangan: "" },
                       ],
                     });

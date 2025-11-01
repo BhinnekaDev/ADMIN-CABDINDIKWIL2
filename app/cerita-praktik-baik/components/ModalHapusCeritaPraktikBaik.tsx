@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { ModalHapusSeputarCabdinProps } from "@/app/seputar-cabdin/interfaces/modal-hapus-seputar-cabdin-props.interface";
+import { ModalHapusCeritaPraktikBaikProps } from "@/app/cerita-praktik-baik/interfaces/modal-hapus-cerita-praktik-baik-props.interface";
 
-export default function ModalHapusSeputarCabdin({
+export default function ModalHapusCeritaPraktikBaik({
   item,
   loading,
   onDelete,
   closeModal,
-}: ModalHapusSeputarCabdinProps) {
+}: ModalHapusCeritaPraktikBaikProps) {
   const [confirmationText, setConfirmationText] = useState("");
 
   const handleDelete = async () => {
@@ -29,7 +29,7 @@ export default function ModalHapusSeputarCabdin({
           className="input input-bordered w-full mb-4"
           value={confirmationText}
           onChange={(e) => setConfirmationText(e.target.value)}
-          placeholder="Ketik judul seputar cabdin di sini"
+          placeholder="Ketik judul cerita praktik baik di sini"
         />
         <div className="flex gap-2 justify-end">
           <button

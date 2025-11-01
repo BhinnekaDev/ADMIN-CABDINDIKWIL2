@@ -14,6 +14,7 @@ export const useActiveMenu = () => {
       return "Data Jenis Pendidikan";
     if (pathname.startsWith("/lokasi")) return "Data Lokasi";
     if (pathname.startsWith("/berita")) return "Data Berita";
+    if (pathname.startsWith("/prakata")) return "Data Prakata";
     return "Beranda";
   }, [pathname]);
 

@@ -30,6 +30,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **Authentication**                  | Login, logout, dan manajemen sesi pengguna menggunakan token dan Supabase/Auth API, termasuk validasi email dan penyimpanan session di localStorage. |
 | **CRUD Satuan Pendidikan (Satpen)** | Menambah, melihat, mengedit, dan menghapus data satuan pendidikan di Cabang Dinas Wilayah II.                                                        |
 | **CRUD Berita**                     | Menambah, melihat, mengedit, dan menghapus berita terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                  |
+| **CRUD Prakata**                    | Menambah, melihat, mengedit, dan menghapus prakata terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 
 ---
 
@@ -158,6 +159,28 @@ admin-cabdindikwil2/
 │   │   │   ├── table-sekolah.interface.ts
 │   │   │   ├── use-delete-lokasi-sekolah-props.interface.ts
 │   │   │   └── use-edit-lokasi-sekolah-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── prakata/
+│   │   ├── components/
+│   │   │   ├── HeaderPrakata.tsx
+│   │   │   ├── ModalHapusPrakata.tsx
+│   │   │   ├── ModalPrakata.tsx
+│   │   │   └── TablePrakata.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreatePrakata.ts
+│   │   │   ├── useDeletePrakata.ts
+│   │   │   ├── UseEditPrakata.ts
+│   │   │   └── usePrakata.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-prakata-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-prakata.interface.ts
+│   │   │   ├── modal-prakata.interface.ts
+│   │   │   ├── modal-hapus-prakata-props.interface.ts
+│   │   │   ├── table-prakata.interface.ts
+│   │   │   ├── use-delete-prakata-props.interface.ts
+│   │   │   └── use-edit-prakata-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── satuan-pendidikan/

@@ -22,13 +22,14 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 
 ## ✨ Fitur Admin
 
-| Fitur                    | Deskripsi                                                                                                                                           |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Auto Theme Detection** | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`)                                                        |
-| **DaisyUI Components**   | Memanfaatkan komponen siap pakai yang konsisten dan elegan                                                                                          |
-| **Responsive Design**    | Tampilan optimal di semua ukuran layar (mobile hingga desktop)                                                                                      |
-| **Authentication**       | Login, logout, dan manajemen sesi pengguna menggunakan token dan Supabase/Auth API, termasuk validasi email dan penyimpanan session di localStorage |
-|                          |
+| Fitur                               | Deskripsi                                                                                                                                            |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Auto Theme Detection**            | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`).                                                        |
+| **DaisyUI Components**              | Memanfaatkan komponen siap pakai yang konsisten dan elegan.                                                                                          |
+| **Responsive Design**               | Tampilan optimal di semua ukuran layar (mobile hingga desktop).                                                                                      |
+| **Authentication**                  | Login, logout, dan manajemen sesi pengguna menggunakan token dan Supabase/Auth API, termasuk validasi email dan penyimpanan session di localStorage. |
+| **CRUD Satuan Pendidikan (Satpen)** | Menambah, melihat, mengedit, dan menghapus data satuan pendidikan di Cabang Dinas Wilayah II.                                                        |
+| **CRUD Berita**                     | Menambah, melihat, mengedit, dan menghapus berita terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                  |
 
 ---
 

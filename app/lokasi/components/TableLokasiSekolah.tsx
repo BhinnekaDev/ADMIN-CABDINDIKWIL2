@@ -67,9 +67,9 @@ export default function TableLokasiSekolah({
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
                   <td>{lokasi.kelurahan}</td>
-                  <td>{lokasi.kecamatan}</td>
-                  <td>{lokasi.kabupaten}</td>
-                  <td>{lokasi.provinsi}</td>
+                  <td className="hidden sm:table-cell">{lokasi.kecamatan}</td>
+                  <td className="hidden sm:table-cell">{lokasi.kabupaten}</td>
+                  <td className="hidden sm:table-cell">{lokasi.provinsi}</td>
                   <td>
                     <div className="sm:hidden">
                       <button
@@ -133,7 +133,7 @@ export default function TableLokasiSekolah({
               ))
             ) : (
               <tr>
-                <td colSpan={3} className="text-center py-4">
+                <td colSpan={6} className="text-center py-4">
                   Data tidak ditemukan
                 </td>
               </tr>

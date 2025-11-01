@@ -15,6 +15,7 @@ export const useActiveMenu = () => {
     if (pathname.startsWith("/lokasi")) return "Data Lokasi";
     if (pathname.startsWith("/berita")) return "Data Berita";
     if (pathname.startsWith("/prakata")) return "Data Prakata";
+    if (pathname.startsWith("/seputar-cabdin")) return "Data Seputar Cabdin";
     return "Beranda";
   }, [pathname]);
 

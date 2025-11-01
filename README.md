@@ -31,6 +31,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Satuan Pendidikan (Satpen)** | Menambah, melihat, mengedit, dan menghapus data satuan pendidikan di Cabang Dinas Wilayah II.                                                        |
 | **CRUD Berita**                     | Menambah, melihat, mengedit, dan menghapus berita terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                  |
 | **CRUD Prakata**                    | Menambah, melihat, mengedit, dan menghapus prakata terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
+| **CRUD Seputar Cabdin**             | Menambah, melihat, mengedit, dan menghapus seputar cabdin terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                          |
 
 ---
 
@@ -209,6 +210,28 @@ admin-cabdindikwil2/
 │   │   │   ├── use-delete-satuan-pendidikan-props.interface.ts
 │   │   │   ├── use-edit-satuan-pendidikan-props.interface.ts
 │   │   │   └── use-satuan-pendidikan-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── seputar-cabdin/
+│   │   ├── components/
+│   │   │   ├── HeaderSeputarCabdin.tsx
+│   │   │   ├── ModalHapusSeputarCabdin.tsx
+│   │   │   ├── ModalSeputarCabdin.tsx
+│   │   │   └── TableSeputarCabdin.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateSeputarCabdin.ts
+│   │   │   ├── useDeleteSeputarCabdin.ts
+│   │   │   ├── UseEditSeputarCabdin.ts
+│   │   │   └── useSeputarCabdin.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-seputar-cabdin-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-seputar-cabdin.interface.ts
+│   │   │   ├── modal-seputar-cabdin.interface.ts
+│   │   │   ├── modal-hapus-seputar-cabdin-props.interface.ts
+│   │   │   ├── table-seputar-cabdin.interface.ts
+│   │   │   ├── use-delete-seputar-cabdin-props.interface.ts
+│   │   │   └── use-edit-seputar-cabdin-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   │   ├── layout.tsx

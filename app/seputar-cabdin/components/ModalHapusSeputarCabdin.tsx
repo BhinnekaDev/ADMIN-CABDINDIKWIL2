@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { ModalHapusPrakataProps } from "@/app/prakata/interfaces/modal-hapus-prakata-props.interface";
+import { ModalHapusSeputarCabdinProps } from "@/app/seputar-cabdin/interfaces/modal-hapus-seputar-cabdin-props.interface";
 
-export default function ModalHapusPrakata({
+export default function ModalHapusSeputarCabdin({
   item,
   loading,
   onDelete,
   closeModal,
-}: ModalHapusPrakataProps) {
+}: ModalHapusSeputarCabdinProps) {
   const [confirmationText, setConfirmationText] = useState("");
 
   const handleDelete = async () => {
@@ -29,7 +29,7 @@ export default function ModalHapusPrakata({
           className="input input-bordered w-full mb-4"
           value={confirmationText}
           onChange={(e) => setConfirmationText(e.target.value)}
-          placeholder="Ketik judul prakata di sini"
+          placeholder="Ketik nama judul seputar cabdin di sini"
         />
         <div className="flex gap-2 justify-end">
           <button

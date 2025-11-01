@@ -52,6 +52,11 @@ export const menuItems = [
         path: "/cerita-praktik-baik",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
+      {
+        name: "Data Inovasi",
+        path: "/inovasi",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
     ],
   },
 ];

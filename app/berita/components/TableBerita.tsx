@@ -1,13 +1,14 @@
+import Image from "next/image";
 import { useState } from "react";
-import { Edit2, Trash2 } from "lucide-react";
-import { TableSatuanPendidikanProps } from "@/app/satuan-pendidikan/interfaces/table-satuan-pendidikan.interface";
+import { Edit2, Trash2, ImageOff } from "lucide-react";
+import { TableBeritaProps } from "@/app/berita/interfaces/table-berita.interface";
 
-export default function TablesatuanPendidikan({
+export default function TableBerita({
   data,
   loading,
   openEditModal,
   openDeleteModal,
-}: TableSatuanPendidikanProps) {
+}: TableBeritaProps) {
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
   const itemsPerPage = 5;
@@ -22,19 +23,27 @@ export default function TablesatuanPendidikan({
     setCurrentPage(page);
   };
 
+  const supabaseImageLoader = ({
+    src,
+    width,
+  }: {
+    src: string;
+    width: number;
+  }) => {
+    return `${src}?width=${width}`;
+  };
+
   return (
     <>
       <div className="overflow-x-auto w-full max-w-5xl shadow-lg rounded-lg">
         <table className="table w-full">
           <thead>
             <tr>
-              <th className="hidden md:table-cell">Nomor</th>
-              <th className="hidden sm:table-cell">NPSN</th>
-              <th>Nama</th>
-              <th className="hidden md:table-cell">Status</th>
-              <th className="hidden xl:table-cell">Alamat</th>
-              <th className="hidden xl:table-cell">Jenis Sekolah</th>
-              <th className="hidden xl:table-cell">Lokasi</th>
+              <th className="hidden sm:table-cell">Nomor</th>
+              <th className="hidden sm:table-cell">Gambar</th>
+              <th>Judul</th>
+              <th className="hidden sm:table-cell">Penulis</th>
+              <th className="hidden sm:table-cell">Tanggal</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -42,7 +51,7 @@ export default function TablesatuanPendidikan({
             {loading ? (
               Array.from({ length: 4 }).map((_, i) => (
                 <tr key={i} className="animate-pulse">
-                  <td className="hidden md:table-cell">
+                  <td className="hidden sm:table-cell">
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
                   <td className="hidden sm:table-cell">
@@ -51,58 +60,63 @@ export default function TablesatuanPendidikan({
                   <td>
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
-                  <td className="hidden md:table-cell">
+                  <td className="hidden sm:table-cell">
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td className="hidden sm:table-cell">
                     <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
                   </td>
-                  <td className="hidden xl:table-cell">
-                    <div className="h-4 w-20 bg-gray-100  dark:bg-gray-700 rounded"></div>
-                  </td>
-                  <td className="hidden xl:table-cell">
-                    <div className="h-4 w-20 bg-gray-100  dark:bg-gray-700 rounded"></div>
-                  </td>
-                  <td className="hidden xl:table-cell">
+                  <td>
                     <div className="h-4 w-20 bg-gray-100  dark:bg-gray-700 rounded"></div>
                   </td>
                 </tr>
               ))
             ) : paginatedData.length ? (
-              paginatedData.map((satuanPendidikan, index) => (
-                <tr key={satuanPendidikan.npsn}>
-                  <td className="hidden md:table-cell">
+              paginatedData.map((berita, index) => (
+                <tr key={berita.id}>
+                  <td className="hidden sm:table-cell">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
                   <td className="hidden sm:table-cell">
-                    {satuanPendidikan.npsn}
+                    {berita.berita_gambar?.length ? (
+                      <div className="relative w-16 h-16">
+                        <Image
+                          loader={supabaseImageLoader}
+                          src={
+                            berita.berita_gambar?.[0]?.url_gambar ||
+                            "/placeholder.png"
+                          }
+                          alt={
+                            berita.berita_gambar?.[0]?.keterangan || "Gambar"
+                          }
+                          fill
+                          className="object-cover rounded-lg border"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400">
+                        <ImageOff size={20} />
+                      </div>
+                    )}
                   </td>
-                  <td>{satuanPendidikan.nama}</td>
-                  <td className="hidden md:table-cell">
-                    <span
-                      className={`badge ${
-                        satuanPendidikan.status === "Negeri"
-                          ? "badge-success"
-                          : "badge-warning"
-                      }`}
-                    >
-                      {satuanPendidikan.status}
-                    </span>
-                  </td>
-
-                  <td className="hidden xl:table-cell">
-                    {satuanPendidikan.alamat}
-                  </td>
-                  <td className="hidden xl:table-cell">
-                    {satuanPendidikan.jenis_sekolah.nama_jenis}
-                  </td>
-                  <td className="hidden xl:table-cell">
-                    {satuanPendidikan.lokasi.kecamatan}
+                  <td>{berita.judul}</td>
+                  <td className="hidden sm:table-cell">{berita.penulis}</td>
+                  <td className="hidden sm:table-cell">
+                    {" "}
+                    {new Date(berita.tanggal_diterbitkan).toLocaleDateString(
+                      "id-ID",
+                      {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      }
+                    )}
                   </td>
                   <td>
                     <div className="sm:hidden">
                       <button
                         className="btn btn-sm btn-ghost"
-                        onClick={() =>
-                          setMobileActionItem(satuanPendidikan.npsn)
-                        }
+                        onClick={() => setMobileActionItem(berita.id)}
                       >
                         ⋮
                       </button>
@@ -111,19 +125,19 @@ export default function TablesatuanPendidikan({
                     <div className="hidden sm:flex gap-2">
                       <button
                         className="btn btn-sm btn-outline btn-info flex items-center gap-1"
-                        onClick={() => openEditModal(satuanPendidikan)}
+                        onClick={() => openEditModal(berita)}
                       >
                         <Edit2 size={14} /> Sunting
                       </button>
                       <button
                         className="btn btn-sm btn-outline btn-error flex items-center gap-1"
-                        onClick={() => openDeleteModal(satuanPendidikan)}
+                        onClick={() => openDeleteModal(berita)}
                       >
                         <Trash2 size={14} /> Hapus
                       </button>
                     </div>
 
-                    {mobileActionItem === satuanPendidikan.npsn && (
+                    {mobileActionItem === berita.id && (
                       <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
                         <div className="bg-white dark:bg-[#1d232a] w-full max-w-md p-4 rounded-t-lg animate-slide-up">
                           <h3 className="text-lg font-semibold mb-4">
@@ -132,7 +146,7 @@ export default function TablesatuanPendidikan({
                           <button
                             className="btn btn-block text-white btn-info mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openEditModal(satuanPendidikan);
+                              openEditModal(berita);
                               setMobileActionItem(null);
                             }}
                           >
@@ -141,7 +155,7 @@ export default function TablesatuanPendidikan({
                           <button
                             className="btn btn-block text-white btn-error mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openDeleteModal(satuanPendidikan);
+                              openDeleteModal(berita);
                               setMobileActionItem(null);
                             }}
                           >
@@ -161,7 +175,7 @@ export default function TablesatuanPendidikan({
               ))
             ) : (
               <tr>
-                <td colSpan={8} className="text-center py-4">
+                <td colSpan={6} className="text-center py-4">
                   Data tidak ditemukan
                 </td>
               </tr>

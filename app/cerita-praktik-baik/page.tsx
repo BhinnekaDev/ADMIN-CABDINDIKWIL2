@@ -3,18 +3,18 @@
 import {
   DataItem,
   DataItemNonId,
-} from "@/app/seputar-cabdin/interfaces/data-item.interface";
+} from "@/app/cerita-praktik-baik/interfaces/data-item.interface";
 import { useState, useEffect } from "react";
-import { useSeputarCabdin } from "@/app/seputar-cabdin/hooks/useSeputarCabdin";
-import TableSeputarCabdin from "@/app/seputar-cabdin/components/TableSeputarCabdin";
-import ModalSeputarCabdin from "@/app/seputar-cabdin/components/ModalSeputarCabdin";
-import HeaderSeputarCabdin from "@/app/seputar-cabdin/components/HeaderSeputarCabdin";
-import { useEditSeputarCabdin } from "@/app/seputar-cabdin/hooks/UseEditSeputarCabdin";
-import { useCreateSeputarCabdin } from "@/app/seputar-cabdin/hooks/useCreateSeputarCabdin";
-import { useDeleteSeputarCabdin } from "@/app/seputar-cabdin/hooks/useDeleteSeputarCabdin";
-import ModalHapusSeputarCabdin from "@/app/seputar-cabdin/components/ModalHapusSeputarCabdin";
+import { useCeritaPraktikBaik } from "@/app/cerita-praktik-baik/hooks/useCeritaPraktikBaik";
+import TableCeritaPraktikBaik from "@/app/cerita-praktik-baik/components/TableCeritaPraktikBaik";
+import ModalCeritaPraktikBaik from "@/app/cerita-praktik-baik/components/ModalCeritaPraktikBaik";
+import HeaderCeritaPraktikBaik from "@/app/cerita-praktik-baik/components/HeaderCeritaPraktikBaik";
+import { useEditCeritaPraktikBaik } from "@/app/cerita-praktik-baik/hooks/UseEditCeritaPraktikBaik";
+import { useCreateCeritaPraktikBaik } from "@/app/cerita-praktik-baik/hooks/useCreateCeritaPraktikBaik";
+import { useDeleteCeritaPraktikBaik } from "@/app/cerita-praktik-baik/hooks/useDeleteCeritaPraktikBaik";
+import ModalHapusCeritaPraktikBaik from "@/app/cerita-praktik-baik/components/ModalHapusCeritaPraktikBaik";
 
-export default function SeputarCabdinPage() {
+export default function CeritaPraktikBaikPage() {
   const [search, setSearch] = useState("");
   const [data, setData] = useState<DataItem[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,14 +24,17 @@ export default function SeputarCabdinPage() {
     judul: "",
     penulis: "",
     id: undefined,
-    seputar_cabdin_gambar: [],
+    cerita_praktik_baik_gambar: [],
     tanggal_diterbitkan: new Date().toISOString(),
   });
 
-  const { data: fetchedData, loading } = useSeputarCabdin();
-  const { editSeputarCabdin, loading: editing } = useEditSeputarCabdin();
-  const { deleteSeputarCabdin, loading: deleting } = useDeleteSeputarCabdin();
-  const { createSeputarCabdin, loading: creating } = useCreateSeputarCabdin();
+  const { data: fetchedData, loading } = useCeritaPraktikBaik();
+  const { editCeritaPraktikBaik, loading: editing } =
+    useEditCeritaPraktikBaik();
+  const { deleteCeritaPraktikBaik, loading: deleting } =
+    useDeleteCeritaPraktikBaik();
+  const { createCeritaPraktikBaik, loading: creating } =
+    useCreateCeritaPraktikBaik();
   const [editingItem, setEditingItem] = useState<DataItem | null>(null);
 
   useEffect(() => {
@@ -49,8 +52,8 @@ export default function SeputarCabdinPage() {
     setModalInput({
       isi: "",
       judul: "",
+      cerita_praktik_baik_gambar: [],
       penulis: localStorage.getItem("fullName") || "",
-      seputar_cabdin_gambar: [],
       tanggal_diterbitkan: new Date().toISOString(),
     });
     setModalOpen(true);
@@ -63,8 +66,8 @@ export default function SeputarCabdinPage() {
       isi,
       judul,
       penulis,
+      cerita_praktik_baik_gambar,
       tanggal_diterbitkan,
-      seputar_cabdin_gambar,
     } = item;
 
     setModalInput({
@@ -72,8 +75,8 @@ export default function SeputarCabdinPage() {
       isi,
       judul,
       penulis,
+      cerita_praktik_baik_gambar,
       tanggal_diterbitkan,
-      seputar_cabdin_gambar,
     });
     setModalOpen(true);
   };
@@ -84,7 +87,7 @@ export default function SeputarCabdinPage() {
 
   const handleSubmit = async () => {
     if (!modalInput.judul || !modalInput.penulis) return;
-    const newItem = await createSeputarCabdin(modalInput);
+    const newItem = await createCeritaPraktikBaik(modalInput);
     if (newItem) {
       setData((prev) => [...prev, newItem]);
       setModalOpen(false);
@@ -94,7 +97,7 @@ export default function SeputarCabdinPage() {
   const handleEditSubmit = async (): Promise<void> => {
     if (!editingItem) return;
     try {
-      const updatedItem = await editSeputarCabdin(
+      const updatedItem = await editCeritaPraktikBaik(
         editingItem.id,
         modalInput as DataItem
       );
@@ -110,7 +113,7 @@ export default function SeputarCabdinPage() {
   };
 
   const handleDelete = async (id: number) => {
-    const success = await deleteSeputarCabdin(id);
+    const success = await deleteCeritaPraktikBaik(id);
     if (success) {
       setData((prev) => prev.filter((d) => d.id !== id));
       setHapusItem(null);
@@ -119,14 +122,14 @@ export default function SeputarCabdinPage() {
 
   return (
     <div className="flex flex-col items-center justify-center p-6 sm:p-12 w-full">
-      <HeaderSeputarCabdin
+      <HeaderCeritaPraktikBaik
         search={search}
         setSearch={setSearch}
         loading={loading}
         openAddModal={openAddModal}
       />
 
-      <TableSeputarCabdin
+      <TableCeritaPraktikBaik
         data={filteredData}
         loading={loading}
         openEditModal={openEditModal}
@@ -134,7 +137,7 @@ export default function SeputarCabdinPage() {
       />
 
       {modalOpen && (
-        <ModalSeputarCabdin
+        <ModalCeritaPraktikBaik
           modalInput={modalInput}
           onSubmit={editingItem ? handleEditSubmit : handleSubmit}
           loadingCreate={editingItem ? editing : creating}
@@ -145,7 +148,7 @@ export default function SeputarCabdinPage() {
       )}
 
       {hapusItem && (
-        <ModalHapusSeputarCabdin
+        <ModalHapusCeritaPraktikBaik
           item={hapusItem}
           loading={deleting}
           closeModal={() => setHapusItem(null)}

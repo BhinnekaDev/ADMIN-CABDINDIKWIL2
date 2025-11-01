@@ -47,6 +47,11 @@ export const menuItems = [
         path: "/seputar-cabdin",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
+      {
+        name: "Data Cerita Praktik Baik",
+        path: "/cerita-praktik-baik",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
     ],
   },
 ];

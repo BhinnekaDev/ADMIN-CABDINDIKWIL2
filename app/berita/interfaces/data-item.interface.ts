@@ -20,5 +20,4 @@ export type DataItemNonId = Partial<
   Omit<DataItem, "id" | "dibuat_pada" | "diperbarui_pada">
 > & {
   id?: number;
-  url_gambar?: BeritaGambar[];
 };

@@ -106,7 +106,7 @@ export default function ModalBerita({
 
               <input
                 type="text"
-                value={modalInput.url_gambar?.[0]?.keterangan || ""}
+                value={modalInput.berita_gambar?.[0]?.keterangan || ""}
                 onChange={(e) =>
                   setModalInput({
                     ...modalInput,

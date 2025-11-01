@@ -29,12 +29,17 @@ export const menuItems = [
     ],
   },
   {
-    name: "Kelola Berita",
+    name: "Kelola Data",
     icon: createElement(Database, { className: "h-5 w-5" }),
     subItems: [
       {
         name: "Data Berita",
         path: "/berita",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
+      {
+        name: "Data Prakata",
+        path: "/prakata",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
     ],

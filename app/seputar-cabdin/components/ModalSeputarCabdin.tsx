@@ -6,18 +6,18 @@ import dynamic from "next/dynamic";
 import { ImagePlus, X } from "lucide-react";
 import "react-quill-new/dist/quill.snow.css";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-import { ModalBeritaProps } from "@/app/berita/interfaces/modal-berita.interface";
+import { ModalSeputarCabdinProps } from "@/app/seputar-cabdin/interfaces/modal-seputar-cabdin.interface";
 
-export default function ModalBerita({
+export default function ModalSeputarCabdin({
   onSubmit,
   modalInput,
   closeModal,
   editingItem,
   loadingCreate,
   setModalInput,
-}: ModalBeritaProps) {
+}: ModalSeputarCabdinProps) {
   const [previewImage, setPreviewImage] = useState<string | null>(
-    modalInput.berita_gambar?.[0]?.url_gambar || null
+    modalInput.seputar_cabdin_gambar?.[0]?.url_gambar || null
   );
 
   const supabaseImageLoader = ({
@@ -34,7 +34,7 @@ export default function ModalBerita({
     <div className="modal modal-open z-50">
       <div className="modal-box relative shadow-xl rounded-lg bg-white dark:bg-[#1d232a] max-w-3xl w-full">
         <h3 className="font-bold text-lg mb-4 text-center">
-          {editingItem ? "Edit Berita" : "Tambah Berita"}
+          {editingItem ? "Edit Seputar Cabdin" : "Tambah Seputar Cabdin"}
         </h3>
 
         <div className="relative mb-6">
@@ -82,7 +82,7 @@ peer-not-placeholder-shown:text-xs
         </div>
 
         <div className="mb-6">
-          <label className="font-medium mb-2 block">Isi Berita</label>
+          <label className="font-medium mb-2 block">Isi Seputar Cabdin</label>
           <ReactQuill
             theme="snow"
             value={modalInput.isi}
@@ -126,7 +126,7 @@ peer-not-placeholder-shown:text-xs
 
               <input
                 type="text"
-                value={modalInput.berita_gambar?.[0]?.keterangan || ""}
+                value={modalInput.seputar_cabdin_gambar?.[0]?.keterangan || ""}
                 onChange={(e) =>
                   setModalInput({
                     ...modalInput,

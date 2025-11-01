@@ -32,6 +32,8 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Berita**                     | Menambah, melihat, mengedit, dan menghapus berita terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                  |
 | **CRUD Prakata**                    | Menambah, melihat, mengedit, dan menghapus prakata terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 | **CRUD Seputar Cabdin**             | Menambah, melihat, mengedit, dan menghapus seputar cabdin terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                          |
+| **CRUD Cerita Praktik Baik**        | Menambah, melihat, mengedit, dan menghapus cerita praktik baik terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
+| **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 
 ---
 
@@ -86,6 +88,50 @@ Akses melalui [http://localhost:3000](http://localhost:3000).
 ```
 admin-cabdindikwil2/
 ├── app/
+│   ├── berita/
+│   │   ├── components/
+│   │   │   ├── HeaderBerita.tsx
+│   │   │   ├── ModalHapusBerita.tsx
+│   │   │   ├── ModalBerita.tsx
+│   │   │   └── TableBerita.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateBerita.ts
+│   │   │   ├── useDeleteBerita.ts
+│   │   │   ├── UseEditBerita.ts
+│   │   │   └── useBerita.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-berita-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-berita.interface.ts
+│   │   │   ├── modal-berita.interface.ts
+│   │   │   ├── modal-hapus-berita-props.interface.ts
+│   │   │   ├── table-berita.interface.ts
+│   │   │   ├── use-delete-berita-props.interface.ts
+│   │   │   └── use-edit-berita-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── cerita-praktik-baik/
+│   │   ├── components/
+│   │   │   ├── HeaderCeritaPraktikBaik.tsx
+│   │   │   ├── ModalHapusCeritaPraktikBaik.tsx
+│   │   │   ├── ModalCeritaPraktikBaik.tsx
+│   │   │   └── TableCeritaPraktikBaik.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateCeritaPraktikBaik.ts
+│   │   │   ├── useDeleteCeritaPraktikBaik.ts
+│   │   │   ├── UseEditCeritaPraktikBaik.ts
+│   │   │   └── useCeritaPraktikBaik.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-cerita-praktik-baik-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-cerita-praktik-baik.interface.ts
+│   │   │   ├── modal-cerita-praktik-baik.interface.ts
+│   │   │   ├── modal-hapus-cerita-praktik-baik-props.interface.ts
+│   │   │   ├── table-cerita-praktik-baik.interface.ts
+│   │   │   ├── use-delete-cerita-praktik-baik-props.interface.ts
+│   │   │   └── use-edit-cerita-praktik-baik-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── dashboard/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
@@ -93,6 +139,28 @@ admin-cabdindikwil2/
 │   │   ├── interfaces/
 │   │   │   └── auth.interface.ts
 │   │   └── useAuth.ts
+│   ├── inovasi/
+│   │   ├── components/
+│   │   │   ├── HeaderCeritaInovasi.tsx
+│   │   │   ├── ModalHapusCeritaInovasi.tsx
+│   │   │   ├── ModalCeritaInovasi.tsx
+│   │   │   └── TableCeritaInovasi.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateCeritaInovasi.ts
+│   │   │   ├── useDeleteCeritaInovasi.ts
+│   │   │   ├── UseEditCeritaInovasi.ts
+│   │   │   └── useCeritaInovasi.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-inovasi-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-inovasi.interface.ts
+│   │   │   ├── modal-inovasi.interface.ts
+│   │   │   ├── modal-hapus-inovasi-props.interface.ts
+│   │   │   ├── table-inovasi.interface.ts
+│   │   │   ├── use-delete-inovasi-props.interface.ts
+│   │   │   └── use-edit-inovasi-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── jenis-pendidikan/
 │   │   ├── components/
 │   │   │   ├── HeaderJenisSekolah.tsx
@@ -114,28 +182,6 @@ admin-cabdindikwil2/
 │   │   │   ├── table-sekolah.interface.ts
 │   │   │   ├── use-delete-jenis-sekolah-props.interface.ts
 │   │   │   └── use-edit-jenis-sekolah-props.interface.ts
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── berita/
-│   │   ├── components/
-│   │   │   ├── HeaderBerita.tsx
-│   │   │   ├── ModalHapusBerita.tsx
-│   │   │   ├── ModalBerita.tsx
-│   │   │   └── TableBerita.tsx
-│   │   ├── hooks/
-│   │   │   ├── useCreateBerita.ts
-│   │   │   ├── useDeleteBerita.ts
-│   │   │   ├── UseEditBerita.ts
-│   │   │   └── useBerita.ts
-│   │   ├── interfaces/
-│   │   │   ├── create-berita-props.interface.ts
-│   │   │   ├── data-item.interface.ts
-│   │   │   ├── header-berita.interface.ts
-│   │   │   ├── modal-berita.interface.ts
-│   │   │   ├── modal-hapus-berita-props.interface.ts
-│   │   │   ├── table-berita.interface.ts
-│   │   │   ├── use-delete-berita-props.interface.ts
-│   │   │   └── use-edit-berita-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── lokasi/

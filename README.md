@@ -113,6 +113,28 @@ admin-cabdindikwil2/
 │   │   │   └── use-edit-jenis-sekolah-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
+│   ├── berita/
+│   │   ├── components/
+│   │   │   ├── HeaderBerita.tsx
+│   │   │   ├── ModalHapusBerita.tsx
+│   │   │   ├── ModalBerita.tsx
+│   │   │   └── TableBerita.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateBerita.ts
+│   │   │   ├── useDeleteBerita.ts
+│   │   │   ├── UseEditBerita.ts
+│   │   │   └── useBerita.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-berita-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-berita.interface.ts
+│   │   │   ├── modal-berita.interface.ts
+│   │   │   ├── modal-hapus-berita-props.interface.ts
+│   │   │   ├── table-berita.interface.ts
+│   │   │   ├── use-delete-berita-props.interface.ts
+│   │   │   └── use-edit-berita-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── lokasi/
 │   │   ├── components/
 │   │   │   ├── HeaderLokasiSekolah.tsx

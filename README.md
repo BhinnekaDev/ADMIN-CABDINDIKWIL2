@@ -88,6 +88,22 @@ Akses melalui [http://localhost:3000](http://localhost:3000).
 ```
 admin-cabdindikwil2/
 ├── app/
+│   ├── admin/
+│   │   ├── components/
+│   │   │   ├── HeaderAdmin.tsx
+│   │   │   ├── ModalAdmin.tsx
+│   │   │   └── TableAdmin.tsx
+│   │   ├── hooks/
+│   │   │   ├── useAdmin.ts
+│   │   │   └── UseEditAdmin.ts
+│   │   ├── interfaces/
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-admin.interface.ts
+│   │   │   ├── modal-admin.interface.ts
+│   │   │   ├── table-admin.interface.ts
+│   │   │   └── use-edit-admin-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── berita/
 │   │   ├── components/
 │   │   │   ├── HeaderBerita.tsx

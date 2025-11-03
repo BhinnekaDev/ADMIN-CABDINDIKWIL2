@@ -141,10 +141,10 @@ export default function ModalSatuanPendidikan({
                   lokasi: {
                     ...modalInput.lokasi,
                     id: Number(e.target.value),
-                    kelurahan:
+                    alamat:
                       fetchedLokasi?.find(
                         (l) => l.id === Number(e.target.value)
-                      )?.kelurahan || "",
+                      )?.alamat || "",
                   },
                 })
               }
@@ -157,7 +157,7 @@ export default function ModalSatuanPendidikan({
               {!loadingLokasi &&
                 fetchedLokasi?.map((lokasi) => (
                   <option key={lokasi.id} value={lokasi.id}>
-                    {lokasi.kelurahan}
+                    {lokasi.alamat}
                   </option>
                 ))}
             </select>

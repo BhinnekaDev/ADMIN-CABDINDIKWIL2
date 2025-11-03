@@ -1,6 +1,4 @@
 export interface LokasiData {
+  alamat: string;
   kelurahan: string;
-  kecamatan: string;
-  kabupaten: string;
-  provinsi: string;
 }

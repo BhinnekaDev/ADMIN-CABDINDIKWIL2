@@ -17,6 +17,27 @@ export default function ModalLokasiSekolah({
         <div className="relative mb-6">
           <input
             type="text"
+            id="alamat"
+            value={modalInput.alamat}
+            onChange={(e) =>
+              setModalInput({ ...modalInput, alamat: e.target.value })
+            }
+            placeholder=" "
+            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+          />
+          <label
+            htmlFor="alamat"
+            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
+      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
+peer-not-placeholder-shown:text-xs
+`}
+          >
+            Alamat
+          </label>
+        </div>
+        <div className="relative mb-6">
+          <input
+            type="text"
             id="kelurahan"
             value={modalInput.kelurahan}
             onChange={(e) =>
@@ -33,69 +54,6 @@ peer-not-placeholder-shown:text-xs
 `}
           >
             Kelurahan
-          </label>
-        </div>
-        <div className="relative mb-6">
-          <input
-            type="text"
-            id="kecamatan"
-            value={modalInput.kecamatan}
-            onChange={(e) =>
-              setModalInput({ ...modalInput, kecamatan: e.target.value })
-            }
-            placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
-          />
-          <label
-            htmlFor="kecamatan"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
-          >
-            Kecamatan
-          </label>
-        </div>
-        <div className="relative mb-6">
-          <input
-            type="text"
-            id="kabupaten"
-            value={modalInput.kabupaten}
-            onChange={(e) =>
-              setModalInput({ ...modalInput, kabupaten: e.target.value })
-            }
-            placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
-          />
-          <label
-            htmlFor="kabupaten"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
-          >
-            Kabupaten
-          </label>
-        </div>
-        <div className="relative mb-6">
-          <input
-            type="text"
-            id="provinsi"
-            value={modalInput.provinsi}
-            onChange={(e) =>
-              setModalInput({ ...modalInput, provinsi: e.target.value })
-            }
-            placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
-          />
-          <label
-            htmlFor="provinsi"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
-          >
-            Provinsi
           </label>
         </div>
         <div className="flex justify-end gap-2">

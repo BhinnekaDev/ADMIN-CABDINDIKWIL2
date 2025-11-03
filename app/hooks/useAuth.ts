@@ -28,8 +28,12 @@ export function useAuth() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok)
-        throw new Error("Gagal masuk. Periksa kembali email/sandi Anda.");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        const message =
+          errorData?.message || `Login gagal. Status: ${res.status}`;
+        throw new Error(message);
+      }
 
       const data: LoginResponse = await res.json();
 

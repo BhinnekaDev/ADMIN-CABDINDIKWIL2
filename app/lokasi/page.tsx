@@ -17,10 +17,8 @@ export default function LokasiSekolahPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [hapusItem, setHapusItem] = useState<DataItem | null>(null);
   const [modalInput, setModalInput] = useState({
+    alamat: "",
     kelurahan: "",
-    kecamatan: "",
-    kabupaten: "",
-    provinsi: "",
   });
 
   const { data: fetchedData, loading } = useLokasiSekolah();
@@ -34,8 +32,8 @@ export default function LokasiSekolahPage() {
   }, [fetchedData]);
 
   const handleSubmit = async () => {
-    const { kelurahan, kecamatan, kabupaten, provinsi } = modalInput;
-    if (!kelurahan || !kecamatan || !kabupaten || !provinsi) return;
+    const { alamat, kelurahan } = modalInput;
+    if (!alamat || !kelurahan) return;
 
     const newItem = await createLokasi(modalInput);
     if (newItem) {
@@ -51,10 +49,8 @@ export default function LokasiSekolahPage() {
   const openAddModal = () => {
     setEditingItem(null);
     setModalInput({
+      alamat: "",
       kelurahan: "",
-      kecamatan: "",
-      kabupaten: "",
-      provinsi: "",
     });
     setModalOpen(true);
   };

@@ -5,7 +5,6 @@ export interface DataItemSatuanPendidikan {
   npsn: number;
   nama: string;
   status: string;
-  alamat: string;
   jenis_sekolah: JenisSekolahData;
   lokasi: LokasiData;
 }

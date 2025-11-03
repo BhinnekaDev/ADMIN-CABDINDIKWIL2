@@ -30,13 +30,10 @@ export default function LokasiSekolahPage() {
     npsn: 0,
     nama: "",
     status: "",
-    alamat: "",
     jenis_sekolah: { id: 0, nama_jenis: "" },
     lokasi: {
       id: 0,
-      provinsi: "",
-      kabupaten: "",
-      kecamatan: "",
+      alamat: "",
       kelurahan: "",
     },
   });
@@ -64,27 +61,22 @@ export default function LokasiSekolahPage() {
 
       const lokasi = fetchedLokasi.find(
         (l) =>
-          l.kelurahan === pendingEditItem.lokasi?.kelurahan &&
-          l.kecamatan === pendingEditItem.lokasi?.kecamatan &&
-          l.kabupaten === pendingEditItem.lokasi?.kabupaten &&
-          l.provinsi === pendingEditItem.lokasi?.provinsi
+          l.alamat === pendingEditItem.lokasi?.alamat &&
+          l.kelurahan === pendingEditItem.lokasi?.kelurahan
       );
 
       setModalInput({
         npsn: pendingEditItem.npsn,
         nama: pendingEditItem.nama,
         status: pendingEditItem.status,
-        alamat: pendingEditItem.alamat || "",
         jenis_sekolah: {
           id: jenis?.id || 0,
           nama_jenis: pendingEditItem.jenis_sekolah?.nama_jenis || "",
         },
         lokasi: {
           id: lokasi?.id || 0,
+          alamat: pendingEditItem.lokasi?.alamat || "",
           kelurahan: pendingEditItem.lokasi?.kelurahan || "",
-          kecamatan: pendingEditItem.lokasi?.kecamatan || "",
-          kabupaten: pendingEditItem.lokasi?.kabupaten || "",
-          provinsi: pendingEditItem.lokasi?.provinsi || "",
         },
       });
 
@@ -100,13 +92,10 @@ export default function LokasiSekolahPage() {
       npsn: 0,
       nama: "",
       status: "",
-      alamat: "",
       jenis_sekolah: { id: 0, nama_jenis: "" },
       lokasi: {
         id: 0,
-        provinsi: "",
-        kabupaten: "",
-        kecamatan: "",
+        alamat: "",
         kelurahan: "",
       },
     });

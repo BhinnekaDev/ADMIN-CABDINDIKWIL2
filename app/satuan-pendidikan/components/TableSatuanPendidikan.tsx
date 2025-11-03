@@ -32,9 +32,8 @@ export default function TablesatuanPendidikan({
               <th className="hidden sm:table-cell">NPSN</th>
               <th>Nama</th>
               <th className="hidden md:table-cell">Status</th>
+              <th className="hidden xl:table-cell">Jenis</th>
               <th className="hidden xl:table-cell">Alamat</th>
-              <th className="hidden xl:table-cell">Jenis Sekolah</th>
-              <th className="hidden xl:table-cell">Lokasi</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -88,13 +87,10 @@ export default function TablesatuanPendidikan({
                   </td>
 
                   <td className="hidden xl:table-cell">
-                    {satuanPendidikan.alamat}
-                  </td>
-                  <td className="hidden xl:table-cell">
                     {satuanPendidikan.jenis_sekolah.nama_jenis}
                   </td>
                   <td className="hidden xl:table-cell">
-                    {satuanPendidikan.lokasi.kecamatan}
+                    {satuanPendidikan.lokasi.alamat}
                   </td>
                   <td>
                     <div className="sm:hidden">

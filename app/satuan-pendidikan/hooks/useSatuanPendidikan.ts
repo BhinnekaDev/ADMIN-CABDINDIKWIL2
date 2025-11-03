@@ -16,7 +16,6 @@ export function useCreateSatuanPendidikan(): CreateSatuanPendidikanProps {
       npsn: data.npsn,
       nama: data.nama,
       status: data.status,
-      alamat: data.alamat,
       jenis_id: data.jenis_sekolah.id,
       lokasi_id: data.lokasi.id,
     };

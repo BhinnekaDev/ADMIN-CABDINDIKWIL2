@@ -8,6 +8,7 @@ export const useActiveMenu = () => {
 
   const active = useMemo(() => {
     if (pathname === "/dashboard") return "Beranda";
+    if (pathname.startsWith("/admin")) return "Data Admin";
     if (pathname.startsWith("/satuan-pendidikan"))
       return "Data Satuan Pendidikan";
     if (pathname.startsWith("/jenis-pendidikan"))

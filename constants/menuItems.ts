@@ -33,6 +33,11 @@ export const menuItems = [
     icon: createElement(Database, { className: "h-5 w-5" }),
     subItems: [
       {
+        name: "Data Admin",
+        path: "/admin",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
+      {
         name: "Data Berita",
         path: "/berita",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),

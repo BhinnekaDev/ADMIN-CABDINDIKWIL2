@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import toast from "react-hot-toast";
 import { ImagePlus, X } from "lucide-react";
 import "react-quill-new/dist/quill.snow.css";
+import { supabase } from "@/lib/supabaseClient";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import { ModalBeritaProps } from "@/app/berita/interfaces/modal-berita.interface";
 
@@ -19,6 +21,7 @@ export default function ModalBerita({
   const [previewImage, setPreviewImage] = useState<string | null>(
     modalInput.berita_gambar?.[0]?.url_gambar || null
   );
+  const [uploading, setUploading] = useState(false);
 
   const supabaseImageLoader = ({
     src,
@@ -28,6 +31,48 @@ export default function ModalBerita({
     width: number;
   }) => {
     return `${src}?width=${width}`;
+  };
+
+  const handleUploadImage = async (file: File) => {
+    try {
+      setUploading(true);
+      toast.loading("Mengunggah gambar...", { id: "upload" });
+
+      const ext = file.name.split(".").pop();
+      const fileName = `berita-${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2)}.${ext}`;
+
+      const { error } = await supabase.storage
+        .from("berita")
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const { data: publicData } = supabase.storage
+        .from("berita")
+        .getPublicUrl(fileName);
+
+      const publicUrl = publicData.publicUrl;
+
+      setPreviewImage(publicUrl);
+      setModalInput({
+        ...modalInput,
+        berita_gambar: [{ url_gambar: publicUrl, keterangan: "" }],
+      });
+
+      toast.success("Gambar berhasil diunggah!", { id: "upload" });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error("Upload gagal:", err.message);
+        toast.error(`Upload gagal: ${err.message}`, { id: "upload" });
+      } else {
+        console.error("Upload gagal:", err);
+        toast.error("Upload gagal. Coba lagi.", { id: "upload" });
+      }
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -46,14 +91,13 @@ export default function ModalBerita({
               setModalInput({ ...modalInput, judul: e.target.value })
             }
             placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+            className="peer block w-full border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
           />
           <label
             htmlFor="judul"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
+              peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
+              peer-not-placeholder-shown:text-xs"
           >
             Judul
           </label>
@@ -72,14 +116,14 @@ peer-not-placeholder-shown:text-xs
               setModalInput({ ...modalInput, penulis: e.target.value })
             }
             placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0 cursor-not-allowed"
+            className="peer block w-full border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0 cursor-not-allowed"
+            readOnly
           />
           <label
             htmlFor="penulis"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
+              peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
+              peer-not-placeholder-shown:text-xs"
           >
             Penulis
           </label>
@@ -121,6 +165,7 @@ peer-not-placeholder-shown:text-xs
                   onClick={() => {
                     setPreviewImage(null);
                     setModalInput({ ...modalInput, berita_gambar: [] });
+                    toast("Gambar dihapus", { icon: "🗑️" });
                   }}
                   className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
                 >
@@ -149,25 +194,21 @@ peer-not-placeholder-shown:text-xs
             </div>
           ) : (
             <label className="cursor-pointer flex flex-col items-center justify-center w-48 h-48 border-2 border-dashed rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
-              <ImagePlus size={32} className="text-gray-400" />
-              <span className="text-sm text-gray-500">Upload Gambar</span>
+              {uploading ? (
+                <span className="text-gray-400 text-sm">Mengunggah...</span>
+              ) : (
+                <>
+                  <ImagePlus size={32} className="text-gray-400" />
+                  <span className="text-sm text-gray-500">Upload Gambar</span>
+                </>
+              )}
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (!file) return;
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    const base64 = reader.result as string;
-                    setPreviewImage(base64);
-                    setModalInput({
-                      ...modalInput,
-                      berita_gambar: [{ url_gambar: base64, keterangan: "" }],
-                    });
-                  };
-                  reader.readAsDataURL(file);
+                  if (file) handleUploadImage(file);
                 }}
               />
             </label>
@@ -182,11 +223,11 @@ peer-not-placeholder-shown:text-xs
             Batal
           </button>
           <button
-            disabled={loadingCreate}
+            disabled={loadingCreate || uploading}
             className="btn btn-primary"
             onClick={onSubmit}
           >
-            {loadingCreate
+            {loadingCreate || uploading
               ? "Menyimpan..."
               : editingItem
               ? "Perbarui"

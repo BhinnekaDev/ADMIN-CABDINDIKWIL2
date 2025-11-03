@@ -300,6 +300,12 @@ admin-cabdindikwil2/
 │   │   └── page.tsx
 │   ├── layout.tsx
 │   └── page.tsx
+├── interfaces/
+│   ├── HeaderProps.interface.tsx
+│   ├── Sidebar.interface.tsx
+│   └── SidebarItemProps.interface.tsx
+├── lib/
+│   └── supabaseClient.ts
 ├── components/
 │   ├── Header.tsx
 │   ├── MobileSidebar.tsx
@@ -311,10 +317,6 @@ admin-cabdindikwil2/
 │   └── useAuthGuard.ts
 ├── constants/
 │   └── menuItems.ts
-├── interfaces/
-│   ├── HeaderProps.interface.tsx
-│   ├── Sidebar.interface.tsx
-│   └── SidebarItemProps.interface.tsx
 ├── package.json
 └── README.md
 ```

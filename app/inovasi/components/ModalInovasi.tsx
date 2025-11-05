@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import toast from "react-hot-toast";
 import { ImagePlus, X } from "lucide-react";
 import "react-quill-new/dist/quill.snow.css";
+import { supabase } from "@/lib/supabaseClient";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import { ModalInovasiProps } from "@/app/inovasi/interfaces/modal-inovasi.interface";
 
@@ -20,6 +22,8 @@ export default function ModalInovasi({
     modalInput.inovasi_gambar?.[0]?.url_gambar || null
   );
 
+  const [uploading, setUploading] = useState(false);
+
   const supabaseImageLoader = ({
     src,
     width,
@@ -28,6 +32,48 @@ export default function ModalInovasi({
     width: number;
   }) => {
     return `${src}?width=${width}`;
+  };
+
+  const handleUploadImage = async (file: File) => {
+    try {
+      setUploading(true);
+      toast.loading("Mengunggah gambar...", { id: "upload" });
+
+      const ext = file.name.split(".").pop();
+      const fileName = `inovasi-${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2)}.${ext}`;
+
+      const { error } = await supabase.storage
+        .from("inovasi")
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const { data: publicData } = supabase.storage
+        .from("inovasi")
+        .getPublicUrl(fileName);
+
+      const publicUrl = publicData.publicUrl;
+
+      setPreviewImage(publicUrl);
+      setModalInput({
+        ...modalInput,
+        inovasi_gambar: [{ url_gambar: publicUrl, keterangan: "" }],
+      });
+
+      toast.success("Gambar berhasil diunggah!", { id: "upload" });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error("Upload gagal:", err.message);
+        toast.error(`Upload gagal: ${err.message}`, { id: "upload" });
+      } else {
+        console.error("Upload gagal:", err);
+        toast.error("Upload gagal. Coba lagi.", { id: "upload" });
+      }
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -121,6 +167,7 @@ peer-not-placeholder-shown:text-xs
                   onClick={() => {
                     setPreviewImage(null);
                     setModalInput({ ...modalInput, inovasi_gambar: [] });
+                    toast("Gambar dihapus", { icon: "🗑️" });
                   }}
                   className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
                 >
@@ -149,31 +196,26 @@ peer-not-placeholder-shown:text-xs
             </div>
           ) : (
             <label className="cursor-pointer flex flex-col items-center justify-center w-48 h-48 border-2 border-dashed rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
-              <ImagePlus size={32} className="text-gray-400" />
-              <span className="text-sm text-gray-500">Upload Gambar</span>
+              {uploading ? (
+                <span className="text-gray-400 text-sm">Mengunggah...</span>
+              ) : (
+                <>
+                  <ImagePlus size={32} className="text-gray-400" />
+                  <span className="text-sm text-gray-500">Upload Gambar</span>
+                </>
+              )}
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (!file) return;
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    const base64 = reader.result as string;
-                    setPreviewImage(base64);
-                    setModalInput({
-                      ...modalInput,
-                      inovasi_gambar: [{ url_gambar: base64, keterangan: "" }],
-                    });
-                  };
-                  reader.readAsDataURL(file);
+                  if (file) handleUploadImage(file);
                 }}
               />
             </label>
           )}
         </div>
-
         <div className="flex justify-end gap-2 mt-6">
           <button
             className="btn btn-outline btn-secondary"

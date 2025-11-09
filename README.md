@@ -34,6 +34,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Seputar Cabdin**             | Menambah, melihat, mengedit, dan menghapus seputar cabdin terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                          |
 | **CRUD Cerita Praktik Baik**        | Menambah, melihat, mengedit, dan menghapus cerita praktik baik terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
 | **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
+| **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.       |
 
 ---
 
@@ -43,6 +44,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | -------------------- | ----------------------------------------------- |
 | **Frontend**         | Next.js 15 (App Router), React 19, TypeScript 5 |
 | **Styling**          | Tailwind CSS 4, DaisyUI Components              |
+| **Animation**        | Framer Motion                                   |
 | **State Management** | Zustand                                         |
 | **Form Handling**    | React Hook Form + Zod Validation                |
 | **Tables**           | TanStack Table v8                               |

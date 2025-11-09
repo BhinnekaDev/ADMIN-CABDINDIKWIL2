@@ -60,6 +60,9 @@ peer-not-placeholder-shown:text-xs
             className="peer block w-full border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
           >
             <option className="dark:bg-black" value="" disabled hidden></option>
+            <option className="dark:bg-black" value="Pending">
+              Pending
+            </option>
             <option className="dark:bg-black" value="Approved">
               Approved
             </option>

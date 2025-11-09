@@ -31,8 +31,8 @@ export default function LoginPage() {
             Selamat Datang Kembali
           </h1>
           <p className="text-lg opacity-95 leading-relaxed">
-            Kelola konten dan data website resmi Dinas Pendidikan Kabupaten
-            Rejang Lebong dengan mudah dan cepat.
+            Kelola konten dan data website resmi Cabang Dinas Pendidikan
+            Provinsi Bengkulu Wilayah II Rejang Lebong dengan mudah dan cepat.
           </p>
         </div>
       </div>

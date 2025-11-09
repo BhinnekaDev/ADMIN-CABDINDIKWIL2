@@ -14,23 +14,36 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
+import {
+  useAdmin,
+  useBerita,
+  useSekolah,
+} from "@/app/dashboard/hooks/useDashboard";
 
 export default function Page() {
-  const adminData = [
-    { name: "Super Admin", jumlah: 1 },
-    { name: "Admin", jumlah: 0 },
-  ];
+  const { data: adminData, loading: loadingAdmin } = useAdmin();
 
-  const beritaData = [{ bulan: "Nov", jumlah: 2 }];
+  const currentYear = new Date().getFullYear();
 
-  const sekolahData = [
-    { name: "SMA", jumlah: 20 },
-    { name: "SMK", jumlah: 15 },
-    { name: "SLB", jumlah: 2 },
-  ];
+  const beritaParams = useMemo(
+    () => ({
+      tahun: currentYear,
+      bulanMulai: 1,
+      bulanAkhir: 12,
+    }),
+    [currentYear]
+  );
+
+  const { data: beritaData, loading: loadingBerita } = useBerita(beritaParams);
+  const { data: sekolahData, loading: loadingSekolah } = useSekolah();
 
   const colors = ["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444"];
+
+  const renderSkeleton = () => (
+    <div className="w-full h-56 bg-base-300 rounded-xl animate-pulse" />
+  );
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center p-6 sm:p-12">
@@ -62,31 +75,41 @@ export default function Page() {
           <h2 className="text-xl font-semibold mb-4 text-base-content">
             Admin
           </h2>
-          <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={adminData}>
-              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.15} />
-              <XAxis dataKey="name" tick={{ fill: "currentColor" }} />
-              <YAxis tick={{ fill: "currentColor" }} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#fff",
-                  color: "#000",
-                  borderRadius: "8px",
-                }}
-              />
-              <Bar
-                dataKey="jumlah"
-                fill="url(#adminGradient)"
-                radius={[10, 10, 0, 0]}
-              />
-              <defs>
-                <linearGradient id="adminGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.9} />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.4} />
-                </linearGradient>
-              </defs>
-            </BarChart>
-          </ResponsiveContainer>
+          {loadingAdmin ? (
+            renderSkeleton()
+          ) : (
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={adminData}>
+                <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.15} />
+                <XAxis dataKey="name" tick={{ fill: "currentColor" }} />
+                <YAxis tick={{ fill: "currentColor" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    color: "#000",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Bar
+                  dataKey="jumlah"
+                  fill="url(#adminGradient)"
+                  radius={[10, 10, 0, 0]}
+                />
+                <defs>
+                  <linearGradient
+                    id="adminGradient"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.9} />
+                    <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.4} />
+                  </linearGradient>
+                </defs>
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </motion.div>
 
         <motion.div
@@ -97,28 +120,32 @@ export default function Page() {
           <h2 className="text-xl font-semibold mb-4 text-base-content">
             Berita
           </h2>
-          <ResponsiveContainer width="100%" height={220}>
-            <LineChart data={beritaData}>
-              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.15} />
-              <XAxis dataKey="bulan" tick={{ fill: "currentColor" }} />
-              <YAxis tick={{ fill: "currentColor" }} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "hsl(var(--b1))",
-                  color: "hsl(var(--bc))",
-                  borderRadius: "8px",
-                }}
-              />
-              <Line
-                type="monotone"
-                dataKey="jumlah"
-                stroke="#8b5cf6"
-                strokeWidth={3}
-                dot={{ fill: "#8b5cf6", r: 5 }}
-                activeDot={{ r: 7 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          {loadingBerita ? (
+            renderSkeleton()
+          ) : (
+            <ResponsiveContainer width="100%" height={220}>
+              <LineChart data={beritaData}>
+                <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.15} />
+                <XAxis dataKey="bulan" tick={{ fill: "currentColor" }} />
+                <YAxis tick={{ fill: "currentColor" }} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--b1))",
+                    color: "hsl(var(--bc))",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="jumlah"
+                  stroke="#8b5cf6"
+                  strokeWidth={3}
+                  dot={{ fill: "#8b5cf6", r: 5 }}
+                  activeDot={{ r: 7 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
         </motion.div>
 
         <motion.div
@@ -129,33 +156,37 @@ export default function Page() {
           <h2 className="text-xl font-semibold mb-4 text-base-content">
             Sekolah
           </h2>
-          <ResponsiveContainer width="100%" height={220}>
-            <PieChart>
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#fff",
-                  color: "hsl(var(--bc))",
-                  borderRadius: "8px",
-                }}
-              />
-              <Pie
-                data={sekolahData}
-                dataKey="jumlah"
-                nameKey="name"
-                outerRadius={80}
-                innerRadius={45}
-                label
-              >
-                {sekolahData.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={colors[index % colors.length]}
-                    className="hover:opacity-80 transition-all"
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
+          {loadingSekolah ? (
+            renderSkeleton()
+          ) : (
+            <ResponsiveContainer width="100%" height={220}>
+              <PieChart>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    color: "hsl(var(--bc))",
+                    borderRadius: "8px",
+                  }}
+                />
+                <Pie
+                  data={sekolahData}
+                  dataKey="jumlah"
+                  nameKey="name"
+                  outerRadius={80}
+                  innerRadius={45}
+                  label
+                >
+                  {sekolahData.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={colors[index % colors.length]}
+                      className="hover:opacity-80 transition-all"
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+          )}
         </motion.div>
       </div>
     </div>

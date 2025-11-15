@@ -67,6 +67,11 @@ export const menuItems = [
         path: "/layanan",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
+      {
+        name: "Data Kontak",
+        path: "/kontak",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
     ],
   },
 ];

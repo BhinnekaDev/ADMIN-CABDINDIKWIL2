@@ -21,6 +21,7 @@ export const useActiveMenu = () => {
       return "Data Cerita Praktik Baik";
     if (pathname.startsWith("/inovasi")) return "Data Inovasi";
     if (pathname.startsWith("/layanan")) return "Data Layanan";
+    if (pathname.startsWith("/kontak")) return "Data Kontak";
     return "Beranda";
   }, [pathname]);
 

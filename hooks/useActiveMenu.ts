@@ -20,6 +20,7 @@ export const useActiveMenu = () => {
     if (pathname.startsWith("/cerita-praktik-baik"))
       return "Data Cerita Praktik Baik";
     if (pathname.startsWith("/inovasi")) return "Data Inovasi";
+    if (pathname.startsWith("/layanan")) return "Data Layanan";
     return "Beranda";
   }, [pathname]);
 

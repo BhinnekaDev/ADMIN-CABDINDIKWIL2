@@ -35,6 +35,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Cerita Praktik Baik**        | Menambah, melihat, mengedit, dan menghapus cerita praktik baik terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
 | **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 | **CRUD Layanan**                    | Menambah, melihat, mengedit, dan menghapus layanan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
+| **CRUD Kontak**                     | Melihat, dan mengedit kontak terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                                       |
 | **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.       |
 
 ---
@@ -180,6 +181,29 @@ admin-cabdindikwil2/
 │   │   │   └── use-edit-inovasi-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
+│   ├── jenis-pendidikan/
+│   │   ├── components/
+│   │   │   ├── HeaderJenisSekolah.tsx
+│   │   │   ├── ModalHapusJenisSekolah.tsx
+│   │   │   ├── ModalJenisSekolah.tsx
+│   │   │   └── TableJenisSekolah.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateJenisSekolah.ts
+│   │   │   ├── useDeleteJenisSekolah.ts
+│   │   │   ├── UseEditJenisSekolahProps.ts
+│   │   │   └── useJenisSekolah.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-jenis-sekolah-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-jenis-sekolah.interface.ts
+│   │   │   ├── jenis-sekolah.interface.ts
+│   │   │   ├── modal-hapus-jenis-sekolah-props.interface.ts
+│   │   │   ├── modal-jenis-sekolah.interface.ts
+│   │   │   ├── table-sekolah.interface.ts
+│   │   │   ├── use-delete-jenis-sekolah-props.interface.ts
+│   │   │   └── use-edit-jenis-sekolah-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── layanan/
 │   │   ├── components/
 │   │   │   ├── HeaderCeritaLayanan.tsx
@@ -202,27 +226,20 @@ admin-cabdindikwil2/
 │   │   │   └── use-edit-layanan-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
-│   ├── jenis-pendidikan/
+│   ├── kontak/
 │   │   ├── components/
-│   │   │   ├── HeaderJenisSekolah.tsx
-│   │   │   ├── ModalHapusJenisSekolah.tsx
-│   │   │   ├── ModalJenisSekolah.tsx
-│   │   │   └── TableJenisSekolah.tsx
+│   │   │   ├── HeaderKontak.tsx
+│   │   │   ├── ModalKontak.tsx
+│   │   │   └── TableKontak.tsx
 │   │   ├── hooks/
-│   │   │   ├── useCreateJenisSekolah.ts
-│   │   │   ├── useDeleteJenisSekolah.ts
-│   │   │   ├── UseEditJenisSekolahProps.ts
-│   │   │   └── useJenisSekolah.ts
+│   │   │   ├── UseEditKontak.ts
+│   │   │   └── useKontak.ts
 │   │   ├── interfaces/
-│   │   │   ├── create-jenis-sekolah-props.interface.ts
 │   │   │   ├── data-item.interface.ts
-│   │   │   ├── header-jenis-sekolah.interface.ts
-│   │   │   ├── jenis-sekolah.interface.ts
-│   │   │   ├── modal-hapus-jenis-sekolah-props.interface.ts
-│   │   │   ├── modal-jenis-sekolah.interface.ts
-│   │   │   ├── table-sekolah.interface.ts
-│   │   │   ├── use-delete-jenis-sekolah-props.interface.ts
-│   │   │   └── use-edit-jenis-sekolah-props.interface.ts
+│   │   │   ├── header-kontak.interface.ts
+│   │   │   ├── modal-kontak.interface.ts
+│   │   │   ├── table-kontak.interface.ts
+│   │   │   └── use-edit-kontak-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── lokasi/

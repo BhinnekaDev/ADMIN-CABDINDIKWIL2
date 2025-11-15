@@ -48,13 +48,8 @@ export const menuItems = [
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
       {
-        name: "Data Seputar Cabdin",
-        path: "/seputar-cabdin",
-        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
-      },
-      {
-        name: "Data Cerita Praktik Baik",
-        path: "/cerita-praktik-baik",
+        name: "Data Kontak",
+        path: "/kontak",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
       {
@@ -68,8 +63,18 @@ export const menuItems = [
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
       {
-        name: "Data Kontak",
-        path: "/kontak",
+        name: "Data Seputar Cabdin",
+        path: "/seputar-cabdin",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
+      {
+        name: "Data Cerita Praktik Baik",
+        path: "/cerita-praktik-baik",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
+      {
+        name: "Data Struktur Organisasi",
+        path: "/struktur-organisasi",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
     ],

@@ -22,6 +22,8 @@ export const useActiveMenu = () => {
     if (pathname.startsWith("/inovasi")) return "Data Inovasi";
     if (pathname.startsWith("/layanan")) return "Data Layanan";
     if (pathname.startsWith("/kontak")) return "Data Kontak";
+    if (pathname.startsWith("/struktur-organisasi"))
+      return "Data Struktur Organisasi";
     return "Beranda";
   }, [pathname]);
 

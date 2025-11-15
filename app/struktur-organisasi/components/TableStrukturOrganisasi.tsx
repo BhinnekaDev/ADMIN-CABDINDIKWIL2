@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Edit2, Trash2, ImageOff, AlertTriangle } from "lucide-react";
-import { TableBeritaProps } from "@/app/berita/interfaces/table-berita.interface";
+import { TableStrukturOrganisasiProps } from "@/app/struktur-organisasi/interfaces/table-struktur-organisasi.interface";
 
-export default function TableBerita({
+export default function TableStrukturOrganisasi({
   data,
   loading,
   openEditModal,
   openDeleteModal,
-}: TableBeritaProps) {
+}: TableStrukturOrganisasiProps) {
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
   const itemsPerPage = 5;
@@ -40,9 +40,8 @@ export default function TableBerita({
           <thead>
             <tr>
               <th className="hidden sm:table-cell">Nomor</th>
-              <th className="hidden sm:table-cell">Gambar</th>
-              <th>Judul</th>
-              <th className="hidden md:table-cell">Penulis</th>
+              <th className="hidden sm:table-cell">Gambar Struktur</th>
+              <th>Gambar Dokumentasi</th>
               <th className="hidden xl:table-cell">Tanggal</th>
               <th>Aksi</th>
             </tr>
@@ -60,35 +59,27 @@ export default function TableBerita({
                   <td className="hidden md:table-cell">
                     <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
-                  <td className="hidden xl:table-cell">
-                    <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
-                  </td>
-                  <td className="hidden xl:table-cell">
-                    <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
-                  </td>
                   <td>
                     <div className="h-4 w-20 bg-gray-100  dark:bg-gray-700 rounded"></div>
                   </td>
                 </tr>
               ))
             ) : paginatedData.length ? (
-              paginatedData.map((berita, index) => (
-                <tr key={berita.id}>
+              paginatedData.map((strukturOrganisasi, index) => (
+                <tr key={strukturOrganisasi.id}>
                   <td className="hidden sm:table-cell">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
                   <td className="hidden sm:table-cell">
-                    {berita.berita_gambar?.length ? (
+                    {strukturOrganisasi.gambar_struktur?.length ? (
                       <div className="relative w-16 h-16">
                         <Image
                           loader={supabaseImageLoader}
                           src={
-                            berita.berita_gambar?.[0]?.url_gambar ||
+                            strukturOrganisasi.gambar_struktur ||
                             "/placeholder.png"
                           }
-                          alt={
-                            berita.berita_gambar?.[0]?.keterangan || "Gambar"
-                          }
+                          alt="Gambar"
                           fill
                           className="object-cover rounded-lg border"
                         />
@@ -99,24 +90,22 @@ export default function TableBerita({
                       </div>
                     )}
                   </td>
-                  <td>{berita.judul}</td>
-                  <td className="hidden md:table-cell">{berita.penulis}</td>
                   <td className="hidden xl:table-cell">
-                    {" "}
-                    {new Date(berita.tanggal_diterbitkan).toLocaleDateString(
-                      "id-ID",
-                      {
-                        day: "2-digit",
-                        month: "long",
-                        year: "numeric",
-                      }
-                    )}
+                    {new Date(
+                      strukturOrganisasi.dibuat_pada
+                    ).toLocaleDateString("id-ID", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </td>
                   <td>
                     <div className="sm:hidden">
                       <button
                         className="btn btn-sm btn-ghost"
-                        onClick={() => setMobileActionItem(berita.id)}
+                        onClick={() =>
+                          setMobileActionItem(strukturOrganisasi.id)
+                        }
                       >
                         ⋮
                       </button>
@@ -125,19 +114,19 @@ export default function TableBerita({
                     <div className="hidden sm:flex gap-2">
                       <button
                         className="btn btn-sm btn-outline btn-info flex items-center gap-1"
-                        onClick={() => openEditModal(berita)}
+                        onClick={() => openEditModal(strukturOrganisasi)}
                       >
                         <Edit2 size={14} /> Sunting
                       </button>
                       <button
                         className="btn btn-sm btn-outline btn-error flex items-center gap-1"
-                        onClick={() => openDeleteModal(berita)}
+                        onClick={() => openDeleteModal(strukturOrganisasi)}
                       >
                         <Trash2 size={14} /> Hapus
                       </button>
                     </div>
 
-                    {mobileActionItem === berita.id && (
+                    {mobileActionItem === strukturOrganisasi.id && (
                       <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
                         <div className="bg-white dark:bg-[#1d232a] w-full max-w-md p-4 rounded-t-lg animate-slide-up">
                           <h3 className="text-lg font-semibold mb-4">
@@ -146,7 +135,7 @@ export default function TableBerita({
                           <button
                             className="btn btn-block text-white btn-info mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openEditModal(berita);
+                              openEditModal(strukturOrganisasi);
                               setMobileActionItem(null);
                             }}
                           >
@@ -155,7 +144,7 @@ export default function TableBerita({
                           <button
                             className="btn btn-block text-white btn-error mb-2 flex items-center justify-center gap-2"
                             onClick={() => {
-                              openDeleteModal(berita);
+                              openDeleteModal(strukturOrganisasi);
                               setMobileActionItem(null);
                             }}
                           >

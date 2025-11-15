@@ -36,6 +36,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 | **CRUD Layanan**                    | Menambah, melihat, mengedit, dan menghapus layanan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 | **CRUD Kontak**                     | Melihat, dan mengedit kontak terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                                       |
+| **CRUD Struktur Organisasi**        | Menambah, melihat, mengedit, dan menghapus struktur organisasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
 | **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.       |
 
 ---
@@ -336,6 +337,30 @@ admin-cabdindikwil2/
 │   │   │   ├── table-seputar-cabdin.interface.ts
 │   │   │   ├── use-delete-seputar-cabdin-props.interface.ts
 │   │   │   └── use-edit-seputar-cabdin-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── struktur-organisasi/
+│   │   ├── components/
+│   │   │   ├── HeaderStrukturOrganisasi.tsx
+│   │   │   ├── ModalHapusStrukturOrganisasi.tsx
+│   │   │   ├── ModalStrukturOrganisasi.tsx
+│   │   │   └── TableStrukturOrganisasi.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateStrukturOrganisasi.ts
+│   │   │   ├── useDeleteStrukturOrganisasi.ts
+│   │   │   ├── UseEditStrukturOrganisasi.ts
+│   │   │   └── useStrukturOrganisasi.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-struktur-organisasi-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-struktur-organisasi.interface.ts
+│   │   │   ├── modal-struktur-organisasi.interface.ts
+│   │   │   ├── modal-hapus-struktur-organisasi-props.interface.ts
+│   │   │   ├── table-struktur-organisasi.interface.ts
+│   │   │   ├── use-delete-struktur-organisasi-props.interface.ts
+│   │   │   └── use-edit-struktur-organisasi-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   │   ├── layout.tsx

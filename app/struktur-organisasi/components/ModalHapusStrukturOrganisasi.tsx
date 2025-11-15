@@ -1,0 +1,54 @@
+"use client";
+
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { ModalHapusStrukturOrganisasiProps } from "@/app/struktur-organisasi/interfaces/modal-hapus-struktur-organisasi-props.interface";
+
+export default function ModalHapusStrukturOrganisasi({
+  item,
+  loading,
+  onDelete,
+  closeModal,
+}: ModalHapusStrukturOrganisasiProps) {
+  const [confirmationText, setConfirmationText] = useState("");
+
+  const handleDelete = async () => {
+    if (confirmationText !== "Setuju") return;
+    await onDelete(item.id);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+      <div className="bg-white dark:bg-[#1d232a] w-full max-w-md p-6 rounded-lg animate-slide-up">
+        <h3 className="text-lg font-semibold mb-4">Konfirmasi Hapus</h3>
+        <p className="mb-4">
+          Ketik <strong>Setuju</strong> untuk menghapus data ini.
+        </p>
+        <input
+          type="text"
+          className="input input-bordered w-full mb-4"
+          value={confirmationText}
+          onChange={(e) => setConfirmationText(e.target.value)}
+          placeholder="Ketik judul struktur organisasi di sini"
+        />
+        <div className="flex gap-2 justify-end">
+          <button
+            className="btn btn-outline btn-secondary"
+            onClick={closeModal}
+            disabled={loading}
+          >
+            Batal
+          </button>
+          <button
+            className="btn btn-error text-white flex items-center gap-2"
+            onClick={handleDelete}
+            disabled={confirmationText !== "Setuju" || loading}
+          >
+            {loading && <Loader2 className="animate-spin w-4 h-4" />}
+            {loading ? "Menghapus..." : "Hapus"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { X } from "lucide-react";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
@@ -17,6 +17,9 @@ export default function ModalLayanan({
 }: ModalLayananProps) {
   const [previewFile, setPreviewFile] = useState<string | null>(
     modalInput.url_file || null
+  );
+  const [previewHTML, setPreviewHTML] = useState<string | null>(
+    modalInput.preview_html || null
   );
   const [uploading, setUploading] = useState(false);
 
@@ -48,13 +51,42 @@ export default function ModalLayanan({
         .getPublicUrl(fileName);
       const publicUrl = publicData.publicUrl;
 
+      let htmlPreview: string | null = null;
+
+      if (file.type.includes("csv") || file.name.endsWith(".csv")) {
+        const res = await fetch("/api/parse-csv", {
+          method: "POST",
+          body: file,
+        });
+        const json = await res.json();
+        htmlPreview = json.html;
+        setPreviewHTML(htmlPreview);
+      }
+
+      if (
+        file.type.includes("spreadsheet") ||
+        file.type.includes("excel") ||
+        file.name.endsWith(".xlsx") ||
+        file.name.endsWith(".xls")
+      ) {
+        const res = await fetch("/api/parse-excel", {
+          method: "POST",
+          body: file,
+        });
+        const json = await res.json();
+        htmlPreview = json.html;
+        setPreviewHTML(htmlPreview);
+      }
+
       setPreviewFile(publicUrl);
+
       setModalInput({
         ...modalInput,
         url_file: publicUrl,
         nama_file: file.name,
         jenis_file: file.type,
         ukuran_file: file.size,
+        preview_html: htmlPreview,
       });
 
       toast.success("File berhasil diunggah!", { id: "upload" });
@@ -71,8 +103,7 @@ export default function ModalLayanan({
 
     try {
       setUploading(true);
-      const url = modalInput.url_file;
-      const fileName = url.split("/").pop();
+      const fileName = modalInput.url_file.split("/").pop();
 
       const { error } = await supabase.storage
         .from("layanan")
@@ -80,12 +111,14 @@ export default function ModalLayanan({
       if (error) throw error;
 
       setPreviewFile(null);
+      setPreviewHTML(null);
       setModalInput({
         ...modalInput,
         url_file: undefined,
         nama_file: "",
         jenis_file: "",
         ukuran_file: 0,
+        preview_html: null,
       });
 
       toast.success("File berhasil dihapus");
@@ -117,9 +150,7 @@ export default function ModalLayanan({
           />
           <label
             htmlFor="judul"
-            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-              peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-              peer-not-placeholder-shown:text-xs"
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
           >
             Judul
           </label>
@@ -138,9 +169,7 @@ export default function ModalLayanan({
           />
           <label
             htmlFor="namaFile"
-            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-              peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-              peer-not-placeholder-shown:text-xs"
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
           >
             Nama File
           </label>
@@ -158,6 +187,7 @@ export default function ModalLayanan({
             <option value="" disabled>
               Pilih jenis layanan
             </option>
+            <option value="Cuti">Cuti</option>
             <option value="Rekomendasi_Penelitian">
               Rekomendasi Penelitian
             </option>
@@ -165,13 +195,13 @@ export default function ModalLayanan({
               Rekomendasi Pindah Sekolah
             </option>
             <option value="Legalisir_Ijazah_SKHU">
-              Legalisir Ijazah / SKHU (SMA/SMK/SLB)
+              Legalisir Ijazah / SKHU
             </option>
             <option value="Perbaikan_Ijzah_SKHU">
-              Surat Keterangan Kesalahan Penulisan Ijazah / SKHU (SMA/SMK/SLB)
+              Surat Keterangan Kesalahan Penulisan Ijazah / SKHU
             </option>
             <option value="Kehilangan_Ijazah">
-              Surat Keterangan Kehilangan Ijazah (SMA/SMK/SLB)
+              Surat Keterangan Kehilangan Ijazah
             </option>
             <option value="Usulan_Karpeg">
               Pembuatan Usulan Kartu Pegawai (KARPEG)
@@ -193,8 +223,7 @@ export default function ModalLayanan({
           </select>
           <label
             htmlFor="jenisLayanan"
-            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-            peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
           >
             Jenis Layanan
           </label>
@@ -203,35 +232,36 @@ export default function ModalLayanan({
         <div className="relative mb-6 flex flex-col items-center gap-3">
           <label className="font-medium">File Layanan</label>
 
-          {previewFile ? (
+          {previewHTML ? (
+            <div className="relative w-full max-h-64 overflow-auto border rounded-lg p-2 bg-white dark:bg-gray-800 shadow">
+              <div
+                dangerouslySetInnerHTML={{ __html: previewHTML }}
+                className="text-sm"
+              />
+              <button
+                onClick={handleRemoveFile}
+                className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          ) : previewFile ? (
             modalInput.jenis_file === "application/pdf" ? (
               <div className="relative w-48 h-48 border border-gray-300 dark:border-gray-600 rounded-lg flex flex-col items-center justify-center bg-white dark:bg-gray-800 shadow hover:shadow-lg transition p-3 gap-2">
-                <div className="flex flex-col items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-red-500 dark:text-red-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6zM6 4h9v5h5v11H6V4z" />
-                  </svg>
-                  <span className="text-sm font-medium text-gray-800 dark:text-gray-100 text-center truncate w-36">
-                    {modalInput.nama_file || "File PDF"}
-                  </span>
-                </div>
-
+                <span className="text-sm font-medium text-gray-800 dark:text-gray-100 text-center truncate w-36">
+                  {modalInput.nama_file || "File PDF"}
+                </span>
                 <a
                   href={previewFile}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 text-sm underline hover:text-blue-800 dark:hover:text-blue-300 transition"
+                  className="text-blue-600 dark:text-blue-400 text-sm underline"
                 >
                   Buka PDF
                 </a>
-
                 <button
                   onClick={handleRemoveFile}
-                  className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full hover:bg-red-600 transition"
+                  className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
                 >
                   <X size={14} />
                 </button>
@@ -264,7 +294,7 @@ export default function ModalLayanan({
               <input
                 type="file"
                 id="fileUpload"
-                accept=".pdf"
+                accept=".pdf,.xls,.xlsx,.csv"
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 disabled={uploading}
                 onChange={(e) =>
@@ -279,8 +309,12 @@ export default function ModalLayanan({
           <button
             className="btn btn-outline btn-secondary"
             onClick={closeModal}
-            disabled={!!previewFile}
-            title={previewFile ? "Tidak bisa batal, hapus file dulu" : "Batal"}
+            disabled={!!previewFile || !!previewHTML}
+            title={
+              previewFile || previewHTML
+                ? "Tidak bisa batal, hapus file dulu"
+                : "Batal"
+            }
           >
             Batal
           </button>

@@ -64,20 +64,64 @@ export default function TableLayanan({
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
                   <td className="hidden sm:table-cell">
-                    {layanan.url_file ? (
-                      <div className="w-32 h-32 border rounded-lg overflow-hidden">
-                        <embed
-                          src={layanan.url_file}
-                          type="application/pdf"
-                          width="100%"
-                          height="100%"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-32 h-32 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400">
-                        <span>PDF Kosong</span>
-                      </div>
-                    )}
+                    {(() => {
+                      const isSpreadsheet =
+                        layanan.jenis_file?.includes("spreadsheet") ||
+                        layanan.jenis_file?.includes("excel") ||
+                        layanan.nama_file?.toLowerCase()?.endsWith(".csv");
+
+                      if (isSpreadsheet) {
+                        const html = layanan.preview_html;
+
+                        const generateCsvHtml = (csvText: string) => {
+                          try {
+                            const rows = csvText
+                              .split("\n")
+                              .map((r) => r.split(","));
+                            return `
+            <table class="min-w-full border border-gray-300">
+              ${rows
+                .map(
+                  (row) =>
+                    `<tr>${row
+                      .map(
+                        (col) =>
+                          `<td class="border px-2 py-1">${col.trim()}</td>`
+                      )
+                      .join("")}</tr>`
+                )
+                .join("")}
+            </table>
+          `;
+                          } catch (err) {
+                            console.error(err);
+                            return "<p class='text-red-500'>Gagal parse CSV</p>";
+                          }
+                        };
+
+                        return (
+                          <div
+                            className="overflow-auto border rounded-lg max-h-[400px]"
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                html && html.length > 0
+                                  ? html.toString()
+                                  : generateCsvHtml(layanan.raw_csv ?? ""),
+                            }}
+                          />
+                        );
+                      }
+
+                      return (
+                        <div className="border rounded-lg overflow-hidden w-full">
+                          <embed
+                            src={layanan.url_file}
+                            type="application/pdf"
+                            className="w-full rounded-lg min-h-[400px]"
+                          />
+                        </div>
+                      );
+                    })()}
                   </td>
                   <td>{layanan.judul}</td>
                   <td className="hidden md:table-cell">{layanan.nama_file}</td>

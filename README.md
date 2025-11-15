@@ -34,6 +34,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Seputar Cabdin**             | Menambah, melihat, mengedit, dan menghapus seputar cabdin terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                          |
 | **CRUD Cerita Praktik Baik**        | Menambah, melihat, mengedit, dan menghapus cerita praktik baik terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
 | **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
+| **CRUD Layanan**                    | Menambah, melihat, mengedit, dan menghapus layanan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
 | **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.       |
 
 ---
@@ -177,6 +178,28 @@ admin-cabdindikwil2/
 │   │   │   ├── table-inovasi.interface.ts
 │   │   │   ├── use-delete-inovasi-props.interface.ts
 │   │   │   └── use-edit-inovasi-props.interface.ts
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── layanan/
+│   │   ├── components/
+│   │   │   ├── HeaderCeritaLayanan.tsx
+│   │   │   ├── ModalHapusCeritaLayanan.tsx
+│   │   │   ├── ModalCeritaLayanan.tsx
+│   │   │   └── TableCeritaLayanan.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateCeritaLayanan.ts
+│   │   │   ├── useDeleteCeritaLayanan.ts
+│   │   │   ├── UseEditCeritaLayanan.ts
+│   │   │   └── useCeritaLayanan.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-layanan-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── header-layanan.interface.ts
+│   │   │   ├── modal-layanan.interface.ts
+│   │   │   ├── modal-hapus-layanan-props.interface.ts
+│   │   │   ├── table-layanan.interface.ts
+│   │   │   ├── use-delete-layanan-props.interface.ts
+│   │   │   └── use-edit-layanan-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── jenis-pendidikan/

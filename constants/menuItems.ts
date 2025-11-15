@@ -62,6 +62,11 @@ export const menuItems = [
         path: "/inovasi",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
+      {
+        name: "Data Layanan",
+        path: "/layanan",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
     ],
   },
 ];

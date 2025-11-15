@@ -76,6 +76,35 @@ export default function ModalSeputarCabdin({
     }
   };
 
+  const handleRemoveImage = async () => {
+    if (!modalInput.seputar_cabdin_gambar?.[0]?.url_gambar) return;
+
+    try {
+      setUploading(true);
+
+      const url = modalInput.seputar_cabdin_gambar[0].url_gambar;
+      const fileName = url.split("/").pop();
+
+      const { error } = await supabase.storage
+        .from("seputar_cabdin")
+        .remove([fileName!]);
+      if (error) throw error;
+
+      setPreviewImage(null);
+      setModalInput({
+        ...modalInput,
+        seputar_cabdin_gambar: [],
+      });
+
+      toast.success("Gambar berhasil dihapus");
+    } catch (err) {
+      console.error("Gagal menghapus gambar:", err);
+      toast.error("Gagal menghapus gambar, coba lagi");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
     <div className="modal modal-open z-50">
       <div className="modal-box relative shadow-xl rounded-lg bg-white dark:bg-[#1d232a] max-w-3xl w-full">
@@ -164,11 +193,7 @@ peer-not-placeholder-shown:text-xs
                   className="object-cover"
                 />
                 <button
-                  onClick={() => {
-                    setPreviewImage(null);
-                    setModalInput({ ...modalInput, seputar_cabdin_gambar: [] });
-                    toast("Gambar dihapus", { icon: "🗑️" });
-                  }}
+                  onClick={handleRemoveImage}
                   className="absolute top-2 right-2 btn btn-xs btn-error text-white rounded-full"
                 >
                   <X size={14} />
@@ -221,6 +246,10 @@ peer-not-placeholder-shown:text-xs
           <button
             className="btn btn-outline btn-secondary"
             onClick={closeModal}
+            disabled={!!previewImage}
+            title={
+              previewImage ? "Tidak bisa batal, hapus gambar dulu" : "Batal"
+            }
           >
             Batal
           </button>

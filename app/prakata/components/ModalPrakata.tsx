@@ -1,3 +1,8 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import { ModalPrakataProps } from "@/app/prakata/interfaces/modal-prakata.interface";
 
 export default function ModalPrakata({
@@ -56,47 +61,41 @@ peer-not-placeholder-shown:text-xs
             Sub Judul
           </label>
         </div>
-        <div className="relative mb-6">
-          <input
-            type="text"
-            id="isi"
+        <div className="mb-6">
+          <label className="font-medium mb-2 block">Isi</label>
+          <ReactQuill
+            theme="snow"
             value={modalInput.isi}
-            onChange={(e) =>
-              setModalInput({ ...modalInput, isi: e.target.value })
-            }
-            placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+            onChange={(value) => setModalInput({ ...modalInput, isi: value })}
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, 3, false] }],
+                ["bold", "italic", "underline", "strike"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["clean"],
+              ],
+            }}
+            className="bg-white dark:bg-[#1d232a]"
           />
-          <label
-            htmlFor="isi"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
-          >
-            Isi
-          </label>
         </div>
-        <div className="relative mb-6">
-          <input
-            type="text"
-            id="penutup"
+        <div className="mb-6">
+          <label className="font-medium mb-2 block">Penutup</label>
+          <ReactQuill
+            theme="snow"
             value={modalInput.penutup}
-            onChange={(e) =>
-              setModalInput({ ...modalInput, penutup: e.target.value })
+            onChange={(value) =>
+              setModalInput({ ...modalInput, penutup: value })
             }
-            placeholder=" "
-            className="peer block w-full border-0 border-b-2 border-gray-300  dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+            modules={{
+              toolbar: [
+                [{ header: [1, 2, 3, false] }],
+                ["bold", "italic", "underline", "strike"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["clean"],
+              ],
+            }}
+            className="bg-white dark:bg-[#1d232a]"
           />
-          <label
-            htmlFor="penutup"
-            className={`absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
-      peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0
-peer-not-placeholder-shown:text-xs
-`}
-          >
-            Penutup
-          </label>
         </div>
         <div className="flex justify-end gap-2">
           <button className="btn btn-secondary" onClick={closeModal}>

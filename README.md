@@ -22,22 +22,22 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 
 ## ✨ Fitur Admin
 
-| Fitur                               | Deskripsi                                                                                                                                            |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Auto Theme Detection**            | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`).                                                        |
-| **DaisyUI Components**              | Memanfaatkan komponen siap pakai yang konsisten dan elegan.                                                                                          |
-| **Responsive Design**               | Tampilan optimal di semua ukuran layar (mobile hingga desktop).                                                                                      |
-| **Authentication**                  | Login, logout, dan manajemen sesi pengguna menggunakan token dan Supabase/Auth API, termasuk validasi email dan penyimpanan session di localStorage. |
-| **CRUD Satuan Pendidikan (Satpen)** | Menambah, melihat, mengedit, dan menghapus data satuan pendidikan di Cabang Dinas Wilayah II.                                                        |
-| **CRUD Berita**                     | Menambah, melihat, mengedit, dan menghapus berita terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                  |
-| **CRUD Prakata**                    | Menambah, melihat, mengedit, dan menghapus prakata terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
-| **CRUD Seputar Cabdin**             | Menambah, melihat, mengedit, dan menghapus seputar cabdin terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                          |
-| **CRUD Cerita Praktik Baik**        | Menambah, melihat, mengedit, dan menghapus cerita praktik baik terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
-| **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
-| **CRUD Layanan**                    | Menambah, melihat, mengedit, dan menghapus layanan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                 |
-| **CRUD Kontak**                     | Melihat, dan mengedit kontak terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                                       |
-| **CRUD Struktur Organisasi**        | Menambah, melihat, mengedit, dan menghapus struktur organisasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                     |
-| **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.       |
+| Fitur                               | Deskripsi                                                                                                                                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Auto Theme Detection**            | Menyesuaikan mode terang/gelap sesuai preferensi sistem (menggunakan `prefers-color-scheme`).                                                                |
+| **DaisyUI Components**              | Memanfaatkan komponen siap pakai yang konsisten dan elegan.                                                                                                  |
+| **Responsive Design**               | Tampilan optimal di semua ukuran layar (mobile hingga desktop).                                                                                              |
+| **Authentication**                  | Login, Daftar, logout, dan manajemen sesi pengguna menggunakan token dan Supabase/Auth API, termasuk validasi email dan penyimpanan session di localStorage. |
+| **CRUD Satuan Pendidikan (Satpen)** | Menambah, melihat, mengedit, dan menghapus data satuan pendidikan di Cabang Dinas Wilayah II.                                                                |
+| **CRUD Berita**                     | Menambah, melihat, mengedit, dan menghapus berita terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                          |
+| **CRUD Prakata**                    | Menambah, melihat, mengedit, dan menghapus prakata terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                         |
+| **CRUD Seputar Cabdin**             | Menambah, melihat, mengedit, dan menghapus seputar cabdin terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                  |
+| **CRUD Cerita Praktik Baik**        | Menambah, melihat, mengedit, dan menghapus cerita praktik baik terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                             |
+| **CRUD Inovasi**                    | Menambah, melihat, mengedit, dan menghapus inovasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                         |
+| **CRUD Layanan**                    | Menambah, melihat, mengedit, dan menghapus layanan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                         |
+| **CRUD Kontak**                     | Melihat, dan mengedit kontak terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                                               |
+| **CRUD Struktur Organisasi**        | Menambah, melihat, mengedit, dan menghapus struktur organisasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                             |
+| **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.               |
 
 ---
 
@@ -109,6 +109,17 @@ admin-cabdindikwil2/
 │   │   │   └── use-edit-admin-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
+│   ├── ajukan/
+│   │   ├── hooks/
+│   │   │   ├── interfaces
+│   │   │   │   └── auth.interface.ts
+│   │   │   └── useAuth.ts
+│   │   └── page.tsx
+│   ├── api/
+│   │   ├── parse-csv/
+│   │   │   └── route.ts
+│   │   └── parse-excel/
+│   │       └── route.ts
 │   ├── berita/
 │   │   ├── components/
 │   │   │   ├── HeaderBerita.tsx

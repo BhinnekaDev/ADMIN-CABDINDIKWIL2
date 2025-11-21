@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { ModalHapusStrukturOrganisasiProps } from "@/app/struktur-organisasi/interfaces/modal-hapus-struktur-organisasi-props.interface";
+import { ModalHapusGambarProps } from "@/app/gambar/interfaces/modal-hapus-gambar-props.interface";
 
-export default function ModalHapusStrukturOrganisasi({
+export default function ModalHapusGambar({
   item,
   loading,
   onDelete,
   closeModal,
-}: ModalHapusStrukturOrganisasiProps) {
+}: ModalHapusGambarProps) {
   const [confirmationText, setConfirmationText] = useState("");
 
   const handleDelete = async () => {

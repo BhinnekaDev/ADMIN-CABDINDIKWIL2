@@ -1,0 +1,222 @@
+import Image from "next/image";
+import { useState } from "react";
+import { Edit2, Trash2, ImageOff, AlertTriangle } from "lucide-react";
+import { TableGambarProps } from "@/app/gambar/interfaces/table-gambar.interface";
+
+export default function TableGambar({
+  data,
+  loading,
+  openEditModal,
+  openDeleteModal,
+}: TableGambarProps) {
+  const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
+
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+  const goToPage = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+
+  const supabaseImageLoader = ({
+    src,
+    width,
+  }: {
+    src: string;
+    width: number;
+  }) => {
+    return `${src}?width=${width}`;
+  };
+
+  return (
+    <>
+      <div className="overflow-x-auto w-full max-w-5xl shadow-lg rounded-lg">
+        <table className="table w-full">
+          <thead>
+            <tr>
+              <th className="hidden sm:table-cell">Nomor</th>
+              <th className="hidden sm:table-cell">Gambar</th>
+              <th>Jenis Sekolah</th>
+              <th className="hidden xl:table-cell">Tanggal Dibuat</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              Array.from({ length: 4 }).map((_, i) => (
+                <tr key={i} className="animate-pulse">
+                  <td className="hidden sm:table-cell">
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td className="hidden sm:table-cell">
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td>
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td className="hidden xl:table-cell">
+                    <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
+                  </td>
+                  <td>
+                    <div className="h-4 w-32 bg-gray-100  dark:bg-gray-700 rounded"></div>
+                  </td>
+                </tr>
+              ))
+            ) : paginatedData.length ? (
+              paginatedData.map((gambar, index) => (
+                <tr key={gambar.id}>
+                  <td className="hidden sm:table-cell">
+                    {(currentPage - 1) * itemsPerPage + index + 1}
+                  </td>
+
+                  <td className="hidden sm:table-cell">
+                    {gambar.url_gambar?.length ? (
+                      <div className="relative w-16 h-16">
+                        <Image
+                          loader={supabaseImageLoader}
+                          src={gambar.url_gambar || ""}
+                          alt={
+                            Array.isArray(gambar.jenis_sekolah)
+                              ? gambar.jenis_sekolah[0]?.nama_jenis || "Gambar"
+                              : gambar.jenis_sekolah?.nama_jenis || "Gambar"
+                          }
+                          fill
+                          className="object-cover rounded-lg border"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400">
+                        <ImageOff size={20} />
+                      </div>
+                    )}
+                  </td>
+
+                  <td className="hidden md:table-cell">
+                    {Array.isArray(gambar.jenis_sekolah)
+                      ? gambar.jenis_sekolah.map((j) => j.nama_jenis).join(", ")
+                      : gambar.jenis_sekolah?.nama_jenis}
+                  </td>
+
+                  <td className="hidden xl:table-cell">
+                    {new Date(gambar.dibuat_pada).toLocaleDateString("id-ID", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </td>
+                  <td>
+                    <div className="sm:hidden">
+                      <button
+                        className="btn btn-sm btn-ghost"
+                        onClick={() => setMobileActionItem(gambar.id)}
+                      >
+                        ⋮
+                      </button>
+                    </div>
+
+                    <div className="hidden sm:flex gap-2">
+                      <button
+                        className="btn btn-sm btn-outline btn-info flex items-center gap-1"
+                        onClick={() => openEditModal(gambar)}
+                      >
+                        <Edit2 size={14} /> Sunting
+                      </button>
+                      <button
+                        className="btn btn-sm btn-outline btn-error flex items-center gap-1"
+                        onClick={() => openDeleteModal(gambar)}
+                      >
+                        <Trash2 size={14} /> Hapus
+                      </button>
+                    </div>
+
+                    {mobileActionItem === gambar.id && (
+                      <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center">
+                        <div className="bg-white dark:bg-[#1d232a] w-full max-w-md p-4 rounded-t-lg animate-slide-up">
+                          <h3 className="text-lg font-semibold mb-4">
+                            Pilih Aksi
+                          </h3>
+                          <button
+                            className="btn btn-block text-white btn-info mb-2 flex items-center justify-center gap-2"
+                            onClick={() => {
+                              openEditModal(gambar);
+                              setMobileActionItem(null);
+                            }}
+                          >
+                            <Edit2 size={16} /> Sunting
+                          </button>
+                          <button
+                            className="btn btn-block text-white btn-error mb-2 flex items-center justify-center gap-2"
+                            onClick={() => {
+                              openDeleteModal(gambar);
+                              setMobileActionItem(null);
+                            }}
+                          >
+                            <Trash2 size={16} /> Hapus
+                          </button>
+                          <button
+                            className="btn btn-outline btn-secondary w-full"
+                            onClick={() => setMobileActionItem(null)}
+                          >
+                            Batal
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={6} className="text-center py-8">
+                  <div className="flex flex-col items-center justify-center gap-2 text-gray-400">
+                    <div className="w-16 h-16 flex items-center justify-center border rounded-lg bg-gray-100 dark:bg-gray-700">
+                      <AlertTriangle size={32} />
+                    </div>
+                    <span className="text-sm font-semibold">
+                      Tidak ada data
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {totalPages > 1 && (
+        <div className="flex gap-2 mt-4">
+          <button
+            className="btn btn-sm"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Sebelum
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`btn btn-sm ${
+                currentPage === i + 1 ? "btn-primary" : ""
+              }`}
+              onClick={() => goToPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            className="btn btn-sm"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Selanjutnya
+          </button>
+        </div>
+      )}
+    </>
+  );
+}

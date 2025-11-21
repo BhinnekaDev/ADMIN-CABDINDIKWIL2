@@ -11,6 +11,7 @@ export const useActiveMenu = () => {
     if (pathname.startsWith("/admin")) return "Data Admin";
     if (pathname.startsWith("/satuan-pendidikan"))
       return "Data Satuan Pendidikan";
+    if (pathname.startsWith("/gambar")) return "Data Gambar";
     if (pathname.startsWith("/jenis-pendidikan"))
       return "Data Jenis Pendidikan";
     if (pathname.startsWith("/lokasi")) return "Data Lokasi";

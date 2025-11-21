@@ -22,6 +22,11 @@ export const menuItems = [
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
       {
+        name: "Data Gambar",
+        path: "/gambar",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
+      {
         name: "Data Lokasi",
         path: "/lokasi",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),

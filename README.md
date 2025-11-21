@@ -37,6 +37,7 @@ Akses panel admin: **[https://admin-cabdindikwil-2.vercel.app/](https://admin-ca
 | **CRUD Layanan**                    | Menambah, melihat, mengedit, dan menghapus layanan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                         |
 | **CRUD Kontak**                     | Melihat, dan mengedit kontak terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                                                               |
 | **CRUD Struktur Organisasi**        | Menambah, melihat, mengedit, dan menghapus struktur organisasi terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                             |
+| **CRUD Gambar Jenis Pendidikan**    | Menambah, melihat, mengedit, dan menghapus gambar jenis pendidikan terkait Dinas Pendidikan Kabupaten Rejang Lebong.                                         |
 | **Dashboard Interaktif**            | Menampilkan visualisasi data berupa grafik interaktif (Admin, Berita, dan Sekolah) yang responsif dan otomatis menyesuaikan tema terang/gelap.               |
 
 ---
@@ -165,6 +166,29 @@ admin-cabdindikwil2/
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── dashboard/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── gambar/
+│   │   ├── components/
+│   │   │   ├── HeaderGambar.tsx
+│   │   │   ├── ModalHapusGambar.tsx
+│   │   │   ├── ModalGambar.tsx
+│   │   │   └── TableGambar.tsx
+│   │   ├── hooks/
+│   │   │   ├── useCreateGambar.ts
+│   │   │   ├── useDeleteGambar.ts
+│   │   │   ├── UseEditGambar.ts
+│   │   │   └── useGambar.ts
+│   │   ├── interfaces/
+│   │   │   ├── create-gambar-props.interface.ts
+│   │   │   ├── data-item.interface.ts
+│   │   │   ├── edit-gambar-request.interface.ts
+│   │   │   ├── header-gambar.interface.ts
+│   │   │   ├── modal-gambar.interface.ts
+│   │   │   ├── modal-hapus-gambar-props.interface.ts
+│   │   │   ├── table-gambar.interface.ts
+│   │   │   ├── use-delete-gambar-props.interface.ts
+│   │   │   └── use-edit-gambar-props.interface.ts
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── hooks/

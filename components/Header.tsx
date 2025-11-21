@@ -52,7 +52,7 @@ export const Header: FC<HeaderProps> = ({ active, onOpenMobileSidebar }) => {
               <li>
                 <a className="flex items-center gap-2 hover:bg-base-300 rounded-lg p-2 transition">
                   <User className="h-4 w-4 text-accent" />
-                  Profile
+                  {localStorage.getItem("fullName")}
                 </a>
               </li>
               <li>

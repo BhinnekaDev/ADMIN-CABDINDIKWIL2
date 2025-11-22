@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Edit2, Trash2, ImageOff, AlertTriangle } from "lucide-react";
 import { TableGambarProps } from "@/app/gambar/interfaces/table-gambar.interface";
 
@@ -12,6 +12,7 @@ export default function TableGambar({
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
   const itemsPerPage = 5;
+  const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
@@ -23,6 +24,13 @@ export default function TableGambar({
     setCurrentPage(page);
   };
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const supabaseImageLoader = ({
     src,
     width,
@@ -31,6 +39,56 @@ export default function TableGambar({
     width: number;
   }) => {
     return `${src}?width=${width}`;
+  };
+
+  const generateMobilePages = () => {
+    const windowSize = 4;
+
+    if (totalPages <= windowSize) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    let start = currentPage - 1;
+
+    if (start < 1) start = 1;
+
+    let end = start + windowSize - 1;
+
+    if (end > totalPages) {
+      end = totalPages;
+      start = end - windowSize + 1;
+    }
+
+    return Array.from({ length: windowSize }, (_, i) => start + i);
+  };
+
+  const generatePages = () => {
+    const pages = [];
+    const maxVisible = 3;
+
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    pages.push(1);
+
+    if (currentPage > maxVisible) {
+      pages.push("...");
+    }
+
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (currentPage < totalPages - maxVisible) {
+      pages.push("...");
+    }
+
+    pages.push(totalPages);
+    return pages;
   };
 
   return (
@@ -96,7 +154,7 @@ export default function TableGambar({
                     )}
                   </td>
 
-                  <td className="hidden md:table-cell">
+                  <td>
                     {Array.isArray(gambar.jenis_sekolah)
                       ? gambar.jenis_sekolah.map((j) => j.nama_jenis).join(", ")
                       : gambar.jenis_sekolah?.nama_jenis}
@@ -197,15 +255,14 @@ export default function TableGambar({
           >
             Sebelum
           </button>
-          {Array.from({ length: totalPages }, (_, i) => (
+          {(isMobile ? generateMobilePages() : generatePages()).map((p, i) => (
             <button
               key={i}
-              className={`btn btn-sm ${
-                currentPage === i + 1 ? "btn-primary" : ""
-              }`}
-              onClick={() => goToPage(i + 1)}
+              disabled={p === "..."}
+              className={`btn btn-sm ${p === currentPage ? "btn-primary" : ""}`}
+              onClick={() => typeof p === "number" && goToPage(p)}
             >
-              {i + 1}
+              {p}
             </button>
           ))}
           <button

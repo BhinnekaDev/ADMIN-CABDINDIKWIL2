@@ -67,7 +67,7 @@ export default function TableKontak({
                   <td className="hidden sm:table-cell">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
-                  <td className="max-w-[50px] sm:max-w-full">
+                  <td className="max-w-32 sm:max-w-none truncate">
                     <span className="block truncate sm:overflow-visible">
                       {kontak.email}
                     </span>

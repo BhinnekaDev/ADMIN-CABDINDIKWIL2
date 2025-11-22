@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Edit2, AlertTriangle } from "lucide-react";
 import { TableAdminProps } from "@/app/admin/interfaces/table-admin.interface";
 
@@ -10,15 +10,73 @@ export default function TableAdmin({
   const [mobileActionItem, setMobileActionItem] = useState<number | null>(null);
 
   const itemsPerPage = 5;
+  const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const goToPage = (page: number) => {
     if (page < 1 || page > totalPages) return;
     setCurrentPage(page);
+  };
+
+  const generateMobilePages = () => {
+    const windowSize = 4;
+
+    if (totalPages <= windowSize) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    let start = currentPage - 1;
+
+    if (start < 1) start = 1;
+
+    let end = start + windowSize - 1;
+
+    if (end > totalPages) {
+      end = totalPages;
+      start = end - windowSize + 1;
+    }
+
+    return Array.from({ length: windowSize }, (_, i) => start + i);
+  };
+
+  const generatePages = () => {
+    const pages = [];
+    const maxVisible = 3;
+
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    pages.push(1);
+
+    if (currentPage > maxVisible) {
+      pages.push("...");
+    }
+
+    const start = Math.max(2, currentPage - 1);
+    const end = Math.min(totalPages - 1, currentPage + 1);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (currentPage < totalPages - maxVisible) {
+      pages.push("...");
+    }
+
+    pages.push(totalPages);
+    return pages;
   };
 
   return (
@@ -164,15 +222,14 @@ export default function TableAdmin({
           >
             Sebelum
           </button>
-          {Array.from({ length: totalPages }, (_, i) => (
+          {(isMobile ? generateMobilePages() : generatePages()).map((p, i) => (
             <button
               key={i}
-              className={`btn btn-sm ${
-                currentPage === i + 1 ? "btn-primary" : ""
-              }`}
-              onClick={() => goToPage(i + 1)}
+              disabled={p === "..."}
+              className={`btn btn-sm ${p === currentPage ? "btn-primary" : ""}`}
+              onClick={() => typeof p === "number" && goToPage(p)}
             >
-              {i + 1}
+              {p}
             </button>
           ))}
           <button

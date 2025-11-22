@@ -21,7 +21,7 @@ export default function HeaderJenisSekolah({
           size={16}
         />
         {loading ? (
-          <div className="h-10 w-full sm:w-64 bg-gray-100 animate-pulse rounded-md" />
+          <div className="h-10 w-full sm:w-64 bg-gray-100 dark:bg-gray-700 animate-pulse rounded-md" />
         ) : (
           <input
             type="text"

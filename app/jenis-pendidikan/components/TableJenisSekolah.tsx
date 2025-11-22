@@ -38,13 +38,13 @@ export default function TableJenisSekolah({
               Array.from({ length: 4 }).map((_, i) => (
                 <tr key={i} className="animate-pulse">
                   <td className="hidden sm:table-cell">
-                    <div className="h-4 w-6 bg-gray-100 rounded"></div>
+                    <div className="h-4 w-6 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
                   <td>
-                    <div className="h-4 w-32 bg-gray-100 rounded"></div>
+                    <div className="h-4 w-32 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
                   <td>
-                    <div className="h-4 w-20 bg-gray-100 rounded"></div>
+                    <div className="h-4 w-20 bg-gray-100 dark:bg-gray-700 rounded"></div>
                   </td>
                 </tr>
               ))

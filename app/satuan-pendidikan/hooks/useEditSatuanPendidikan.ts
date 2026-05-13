@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { SatuanPendidikanData } from "@/app/satuan-pendidikan/interfaces/satuan-pendidikan-data.interface";
 import { DataItemSatuanPendidikan } from "@/app/satuan-pendidikan/interfaces/data-item.interface";
+import { SatuanPendidikanData } from "@/app/satuan-pendidikan/interfaces/satuan-pendidikan-data.interface";
 import { UseEditSatuanPendidikanProps } from "@/app/satuan-pendidikan/interfaces/use-edit-satuan-pendidikan-props.interface";
 
 export function useEditSatuanPendidikan(): UseEditSatuanPendidikanProps {
@@ -9,7 +9,7 @@ export function useEditSatuanPendidikan(): UseEditSatuanPendidikanProps {
 
   const editSatuanPendidikan = async (
     id: number,
-    data: SatuanPendidikanData
+    data: SatuanPendidikanData,
   ): Promise<DataItemSatuanPendidikan | null> => {
     setLoading(true);
     const payload = {
@@ -18,6 +18,8 @@ export function useEditSatuanPendidikan(): UseEditSatuanPendidikanProps {
       status: data.status,
       jenis_id: data.jenis_sekolah.id,
       lokasi_id: data.lokasi.id,
+      jumlah_siswa: data.jumlah_siswa,
+      tautan_sekolah: data.tautan_sekolah,
     };
     try {
       const prodUrl = process.env.NEXT_PUBLIC_API_URL;

@@ -7,4 +7,6 @@ export interface SatuanPendidikanData {
   status: string;
   jenis_sekolah: JenisSekolahData;
   lokasi: LokasiData;
+  jumlah_siswa: number;
+  tautan_sekolah: string;
 }

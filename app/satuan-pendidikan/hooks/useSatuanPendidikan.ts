@@ -8,7 +8,7 @@ export function useCreateSatuanPendidikan(): CreateSatuanPendidikanProps {
   const [loading, setLoading] = useState(false);
 
   const createSatuanPendidikan = async (
-    data: SatuanPendidikanData
+    data: SatuanPendidikanData,
   ): Promise<DataItemSatuanPendidikan | null> => {
     setLoading(true);
 
@@ -18,6 +18,8 @@ export function useCreateSatuanPendidikan(): CreateSatuanPendidikanProps {
       status: data.status,
       jenis_id: data.jenis_sekolah.id,
       lokasi_id: data.lokasi.id,
+      jumlah_siswa: data.jumlah_siswa,
+      tautan_sekolah: data.tautan_sekolah,
     };
 
     try {

@@ -18,7 +18,7 @@ export default function LokasiSekolahPage() {
   const [data, setData] = useState<DataItemSatuanPendidikan[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [hapusItem, setHapusItem] = useState<DataItemSatuanPendidikan | null>(
-    null
+    null,
   );
   const [editingItem, setEditingItem] =
     useState<DataItemSatuanPendidikan | null>(null);
@@ -36,6 +36,8 @@ export default function LokasiSekolahPage() {
       alamat: "",
       kelurahan: "",
     },
+    jumlah_siswa: 0,
+    tautan_sekolah: "",
   });
 
   const { data: fetchedData, loading } = useSatuanPendidikan();
@@ -56,13 +58,13 @@ export default function LokasiSekolahPage() {
       setEditingItem(pendingEditItem);
 
       const jenis = fetchedJenis.find(
-        (j) => j.nama_jenis === pendingEditItem.jenis_sekolah?.nama_jenis
+        (j) => j.nama_jenis === pendingEditItem.jenis_sekolah?.nama_jenis,
       );
 
       const lokasi = fetchedLokasi.find(
         (l) =>
           l.alamat === pendingEditItem.lokasi?.alamat &&
-          l.kelurahan === pendingEditItem.lokasi?.kelurahan
+          l.kelurahan === pendingEditItem.lokasi?.kelurahan,
       );
 
       setModalInput({
@@ -78,6 +80,8 @@ export default function LokasiSekolahPage() {
           alamat: pendingEditItem.lokasi?.alamat || "",
           kelurahan: pendingEditItem.lokasi?.kelurahan || "",
         },
+        jumlah_siswa: pendingEditItem.jumlah_siswa,
+        tautan_sekolah: pendingEditItem.tautan_sekolah,
       });
 
       setPendingEditItem(null);
@@ -98,6 +102,8 @@ export default function LokasiSekolahPage() {
         alamat: "",
         kelurahan: "",
       },
+      jumlah_siswa: 0,
+      tautan_sekolah: "",
     });
     setModalReady(true);
     setModalOpen(true);
@@ -124,11 +130,11 @@ export default function LokasiSekolahPage() {
     if (!editingItem) return;
     const updatedItem = await editSatuanPendidikan(
       editingItem.npsn,
-      modalInput
+      modalInput,
     );
     if (updatedItem) {
       setData((prev) =>
-        prev.map((d) => (d.npsn === updatedItem.npsn ? updatedItem : d))
+        prev.map((d) => (d.npsn === updatedItem.npsn ? updatedItem : d)),
       );
       setModalOpen(false);
       setModalReady(false);

@@ -143,7 +143,7 @@ export default function ModalSatuanPendidikan({
                     id: Number(e.target.value),
                     alamat:
                       fetchedLokasi?.find(
-                        (l) => l.id === Number(e.target.value)
+                        (l) => l.id === Number(e.target.value),
                       )?.alamat || "",
                   },
                 })
@@ -170,6 +170,47 @@ export default function ModalSatuanPendidikan({
             Lokasi Sekolah
           </label>
         </div>
+        <div className="relative mb-6">
+          <input
+            type="number"
+            id="jumlah_siswa"
+            value={modalInput.jumlah_siswa}
+            onChange={(e) =>
+              setModalInput({
+                ...modalInput,
+                jumlah_siswa: Number(e.target.value),
+              })
+            }
+            placeholder=" "
+            className="peer block w-full border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+          />
+          <label
+            htmlFor="jumlah_siswa"
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
+    peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
+          >
+            Jumlah Siswa
+          </label>
+        </div>
+        <div className="relative mb-6">
+          <input
+            type="url"
+            id="tautan_sekolah"
+            value={modalInput.tautan_sekolah}
+            onChange={(e) =>
+              setModalInput({ ...modalInput, tautan_sekolah: e.target.value })
+            }
+            placeholder=" "
+            className="peer block w-full border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent px-0 pt-4 pb-2 text-sm focus:outline-none focus:ring-0"
+          />
+          <label
+            htmlFor="tautan_sekolah"
+            className="absolute left-0 top-4 text-sm text-gray-500 dark:text-gray-400 transition-all
+    peer-focus:-top-1 peer-focus:text-xs peer-not-placeholder-shown:top-0 peer-not-placeholder-shown:text-xs"
+          >
+            Tautan Sekolah
+          </label>
+        </div>
         <div className="flex justify-end gap-2">
           <button className="btn btn-secondary" onClick={closeModal}>
             Batal
@@ -182,8 +223,8 @@ export default function ModalSatuanPendidikan({
             {loadingCreate
               ? "Menyimpan..."
               : editingItem
-              ? "Perbarui"
-              : "Simpan"}
+                ? "Perbarui"
+                : "Simpan"}
           </button>
         </div>
       </div>

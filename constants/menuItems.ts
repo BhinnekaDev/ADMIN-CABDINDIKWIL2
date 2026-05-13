@@ -82,6 +82,11 @@ export const menuItems = [
         path: "/struktur-organisasi",
         icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
       },
+      {
+        name: "Data Pengumuman SMPMB",
+        path: "/pengumuman-smpmb",
+        icon: createElement(DatabaseBackup, { className: "h-5 w-5" }),
+      },
     ],
   },
 ];
